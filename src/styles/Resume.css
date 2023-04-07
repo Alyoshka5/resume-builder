@@ -1,6 +1,136 @@
-.Resume {
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@400;500;800&display=swap');
+
+:root {
+    --theme-color: #425778;
+}
+
+.resume {
+    font-family: 'Saira', sans-serif;
     background-color: #fff;
-    width: 8.5in;
-    height: 11in;
+    width: 51rem;
+    /* height: 66rem; */
+    min-height: 66rem;
+    height: auto;
+    margin: 5rem 0;
+    box-sizing: border-box;
     box-shadow: 0px 0px 7px #cbcbcb;
+    
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 2fr 1.1fr;
+}
+
+p, li {
+    font-size: 0.9rem;
+}
+
+.divider {
+    background-color: var(--theme-color);
+    height: 1px;
+}
+
+/* Main content */
+.main-content {
+    padding: 2.5rem 0.5rem 1rem 2.5rem;
+}
+
+.main-content .section-header {
+    color: var(--theme-color);
+}
+
+.name h1 {
+    font-size: 3.2rem;
+    color: var(--theme-color);
+    line-height: 100%;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem 0;
+}
+
+.section-header {
+    font-weight: 500;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    margin: 1rem 0 0.5rem 0;
+}
+
+.summary .content {
+    margin: 0;
+}
+
+/* Experience */
+.experience {
+    margin-top: 1.8rem;
+}
+
+.job-info {
+    margin-bottom: 2rem;
+}
+
+.experience .job-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.experience .line-one-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.experience .job-position, .experience .job-company {
+    font-weight: 500;
+}
+
+.experience .job-description {
+    margin: 0.5rem 0;
+    padding-left: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.experience .job-description li {
+    display: flex;
+}
+
+.experience .job-description .bullet-point::before {
+    content: "\2022";
+    color: #000;
+    margin-right: 0.5rem;
+}
+
+/* Secondary content */
+.secondary-content {
+    background-color: var(--theme-color);
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+.secondary-content {
+    color: #fff;
+}
+
+/* Contact */
+.contact {
+    margin-bottom: 2rem;
+}
+.contact .contact-info {
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.contact .contact-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Education */
+.education .education-info {
+    font-size: 0.9rem;
+}
+.education .education-degree, .education .education-school {
+    font-weight: 500;
 }

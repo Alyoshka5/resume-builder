@@ -1,43 +1,89 @@
 import '../styles/Resume.css';
+import Icon from '@mdi/react';
+import { mdiPhone, mdiEmailOutline, mdiMapMarker } from '@mdi/js';
 
 export default function Resume({ info }) {
     return (
-        <div className="Resume">
-            <Name name={info.name} />
-            <Contact contact={info.contact} />
-            <Education education={info.education} />
-            <Summary summary={info.summary} />
-            <Experience experience={info.experience} />
+        <div className='resume'>
+            <div className='main-content'>
+                <Name name={info.name} />
+                <Summary summary={info.summary} />
+                <Experience experience={info.experience} />
+            </div>
+            <div className='secondary-content'>
+                <Contact contact={info.contact} />
+                <Education education={info.education} />
+            </div>
         </div>
     );
 }
 
 function Name({ name }) {
     return (
-        <div className="name">
+        <div className='name'>
             <h1>{name}</h1>
+            <div className='divider'></div>
+        </div>
+    );
+}
+
+function Summary({ summary }) {
+    return (
+        <div className='summary'>
+            <h2 className='section-header'>Summary</h2>
+            <p className='content'>{summary}</p>
+        </div>
+    );
+}
+
+function Experience({ experience }) {
+    return (
+        <div className='experience'>
+            <h2 className='section-header'>Experience</h2>
+            {experience.map((job, jobIdx) => {
+                return (
+                    <div className='job-info' key={jobIdx}>
+                        <div className='job-details'>
+                            <div className='line-one-details'>
+                                <span className='job-position'>{job.position}</span> <span className='job-date'>{job.start} - {job.end}</span>
+                            </div>
+                            <div>
+                                <span className='job-company'>{job.company},</span> <span className='job-location'>{job.location}</span>
+                            </div>
+                        </div>
+                        <ul className='job-description'>
+                            {job.description.map((descriptionPoint, pointIdx) => {
+                                return (
+                                    <li key={pointIdx}>
+                                        <div className='bullet-point'></div>
+                                        <div className='job-point'>{descriptionPoint}</div>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
+                );
+            })}
         </div>
     );
 }
 
 function Contact({ contact }) {
     return (
-        <div className="contact">
-            <div className="contact-header">
-                <h2>Contact</h2>
-            </div>
-            <div className="contact-body">
-                <div>
-                    <h3>Phone</h3>
-                    <p>{contact.phone}</p>
+        <div className='contact'>
+            <h2 className='section-header'>Contact</h2>
+            <div className='contact-info'>
+                <div className='contact-detail'>
+                    <Icon path={mdiPhone} size={1} color={'#fff'} />
+                    <span>{contact.phone}</span>
                 </div>
-                <div>
-                    <h3>Email</h3>
-                    <p>{contact.email}</p>
+                <div className='contact-detail'>
+                    <Icon path={mdiEmailOutline} size={1} color={'#fff'} />
+                    <span>{contact.email}</span>
                 </div>
-                <div>
-                    <h3>Address</h3>
-                    <p>{contact.address}</p>
+                <div className='contact-detail'>
+                    <Icon path={mdiMapMarker} size={1} color={'#fff'} />
+                    <span>{contact.address}</span>
                 </div>
             </div>
         </div>
@@ -46,47 +92,19 @@ function Contact({ contact }) {
 
 function Education({ education }) {
     return (
-        <div className="education">
-            <h2>Education</h2>
-            <div className="education-info">
-                <h3>{education.school}</h3>
-                <p>{education.degree}</p>
-                <p>{education.location}</p>
-                <p>{education.graduation}</p>
+        <div className='education'>
+            <h2 className='section-header'>Education</h2>
+            <div className='education-info'>
+                <div>
+                    <span className='education-degree'>{education.degree}</span>
+                </div>
+                <div>
+                    <span className='education-graduation'>Expected in {education.graduation}</span>
+                </div>
+                <div>
+                    <span className='education-school'>{education.school}</span> - <span className='educaiton-location'>{education.location}</span>
+                </div>
             </div>
         </div>
     )
-}
-
-function Summary({ summary }) {
-    return (
-        <div className="summary">
-        <h3>Summary</h3>
-        <p>{summary}</p>
-        </div>
-    );
-}
-
-function Experience({ experience }) {
-    return (
-        <div className='experience'>
-            <h2>Experience</h2>
-            {experience.map((job, jobIdx) => {
-                return (
-                    <div key={jobIdx}>
-                        <p>{job.position}</p>
-                        <p>{job.start}</p>
-                        <p>{job.end}</p>
-                        <p>{job.company}</p>
-                        <p>{job.location}</p>
-                        <ul>
-                            {job.description.map(descriptionPoint => {
-                                return <li>{descriptionPoint}</li>;
-                            })}
-                        </ul>
-                    </div>
-                )
-            })}
-        </div>
-    );
 }
