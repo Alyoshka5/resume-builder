@@ -8,7 +8,6 @@
     font-family: 'Saira', sans-serif;
     background-color: #fff;
     width: 51rem;
-    /* height: 66rem; */
     min-height: 66rem;
     height: auto;
     margin: 5rem 0;
@@ -27,11 +26,27 @@ p, li {
 .divider {
     background-color: var(--theme-color);
     height: 1px;
+    margin-left: 0.5rem;
+}
+
+.editable-content {
+    padding: 0.5rem;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+}
+.editable-content:hover {
+    cursor: pointer;
+    outline: 2px solid var(--theme-color);
+    background-color: #4257782c;
+}
+.contact .editable-content:hover, .education .editable-content:hover {
+    outline: 2px solid #fff;
+    background-color: #ffffff13;
 }
 
 /* Main content */
 .main-content {
-    padding: 2.5rem 0.5rem 1rem 2.5rem;
+    padding: 2.5rem 0.5rem 1rem 2rem;
 }
 
 .main-content .section-header {
@@ -50,7 +65,7 @@ p, li {
     font-weight: 500;
     font-size: 1.5rem;
     text-transform: uppercase;
-    margin: 1rem 0 0.5rem 0;
+    margin: 1rem 0 0 0.5rem;
 }
 
 .summary .content {
@@ -59,11 +74,11 @@ p, li {
 
 /* Experience */
 .experience {
-    margin-top: 1.8rem;
+    margin-top: 1rem;
 }
 
 .job-info {
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
 }
 
 .experience .job-details {
@@ -102,7 +117,7 @@ p, li {
 /* Secondary content */
 .secondary-content {
     background-color: var(--theme-color);
-    padding: 1.5rem;
+    padding: 1.5rem 1rem;
     box-sizing: border-box;
 }
 
