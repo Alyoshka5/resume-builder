@@ -19,6 +19,10 @@
     grid-template-columns: 2fr 1.1fr;
 }
 
+.component {
+    margin-top: 1rem;
+}
+
 p, li {
     font-size: 0.9rem;
 }
@@ -46,7 +50,7 @@ p, li {
 
 /* Main content */
 .main-content {
-    padding: 2.5rem 0.5rem 1rem 2rem;
+    padding: 1.5rem 0.5rem 1rem 2rem;
 }
 
 .main-content .section-header {
@@ -65,7 +69,7 @@ p, li {
     font-weight: 500;
     font-size: 1.5rem;
     text-transform: uppercase;
-    margin: 1rem 0 0 0.5rem;
+    margin: 0rem 0 0 0.5rem;
 }
 
 .summary .content {
@@ -75,6 +79,30 @@ p, li {
 /* Experience */
 .experience {
     margin-top: 1rem;
+}
+
+.experience .section-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-experience-btn {
+    color: var(--theme-color);
+    background-color: #00000000;
+    font-weight: 600;
+    height: 2rem;
+    border-radius: 0.5rem;
+    border: 2px solid var(--theme-color);
+    display: none;
+}
+.add-experience-btn:hover {
+    background-color: #4257782c;
+}
+
+.experience .section-header-container:hover .add-experience-btn {
+    cursor: pointer;
+    display: block;
 }
 
 .job-info {

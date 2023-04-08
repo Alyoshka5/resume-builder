@@ -24,7 +24,7 @@ export default function Resume({ info }: ResumeProps) {
 
 function Name({ name }: NameProp) {
     return (
-        <div className='name'>
+        <div className='name component'>
             <h1 className='editable-content'>{name}</h1>
             <div className='divider'></div>
         </div>
@@ -33,7 +33,7 @@ function Name({ name }: NameProp) {
 
 function Summary({ summary }: SummaryProp) {
     return (
-        <div className='summary'>
+        <div className='summary component'>
             <h2 className='section-header'>Summary</h2>
             <p className='content editable-content'>{summary}</p>
         </div>
@@ -42,8 +42,11 @@ function Summary({ summary }: SummaryProp) {
 
 function Experience({ experience }: ExperienceProps) {
     return (
-        <div className='experience'>
-            <h2 className='section-header'>Experience</h2>
+        <div className='experience component'>
+            <div className='section-header-container'>
+                <h2 className='section-header'>Experience</h2>
+                <button className='add-experience-btn'>Add Experience</button>
+            </div>
             {experience.map((job, jobIdx) => {
                 return (
                     <div className='job-info editable-content' key={jobIdx}>
@@ -74,7 +77,7 @@ function Experience({ experience }: ExperienceProps) {
 
 function Contact({ contact }: ContactProps) {
     return (
-        <div className='contact'>
+        <div className='contact component'>
             <h2 className='section-header'>Contact</h2>
             <div className='contact-info editable-content'>
                 <div className='contact-detail'>
@@ -96,7 +99,7 @@ function Contact({ contact }: ContactProps) {
 
 function Education({ education }: EducationProps) {
     return (
-        <div className='education'>
+        <div className='education component'>
             <h2 className='section-header'>Education</h2>
             <div className='education-info editable-content'>
                 <div>
