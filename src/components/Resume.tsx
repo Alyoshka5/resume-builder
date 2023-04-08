@@ -1,8 +1,11 @@
 import '../styles/Resume.css';
 import Icon from '@mdi/react';
 import { mdiPhone, mdiEmailOutline, mdiMapMarker } from '@mdi/js';
+import { NameProp, SummaryProp, ExperienceProps, ContactProps, EducationProps, ResumeProps } from '../types';
 
-export default function Resume({ info }) {
+
+
+export default function Resume({ info }: ResumeProps) {
     return (
         <div className='resume'>
             <div className='main-content'>
@@ -18,7 +21,8 @@ export default function Resume({ info }) {
     );
 }
 
-function Name({ name }) {
+
+function Name({ name }: NameProp) {
     return (
         <div className='name'>
             <h1>{name}</h1>
@@ -27,7 +31,7 @@ function Name({ name }) {
     );
 }
 
-function Summary({ summary }) {
+function Summary({ summary }: SummaryProp) {
     return (
         <div className='summary'>
             <h2 className='section-header'>Summary</h2>
@@ -36,7 +40,7 @@ function Summary({ summary }) {
     );
 }
 
-function Experience({ experience }) {
+function Experience({ experience }: ExperienceProps) {
     return (
         <div className='experience'>
             <h2 className='section-header'>Experience</h2>
@@ -68,7 +72,7 @@ function Experience({ experience }) {
     );
 }
 
-function Contact({ contact }) {
+function Contact({ contact }: ContactProps) {
     return (
         <div className='contact'>
             <h2 className='section-header'>Contact</h2>
@@ -90,7 +94,7 @@ function Contact({ contact }) {
     );
 }
 
-function Education({ education }) {
+function Education({ education }: EducationProps) {
     return (
         <div className='education'>
             <h2 className='section-header'>Education</h2>
