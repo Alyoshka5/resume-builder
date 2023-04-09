@@ -25,7 +25,7 @@ export default function Resume({ info }: ResumeProps) {
 function Name({ name }: NameProp) {
     return (
         <div className='name component'>
-            <h1 className='editable-content'>{name}</h1>
+            <h1 className='name-header'>{name}</h1>
             <div className='divider'></div>
         </div>
     );
@@ -35,7 +35,7 @@ function Summary({ summary }: SummaryProp) {
     return (
         <div className='summary component'>
             <h2 className='section-header'>Summary</h2>
-            <p className='content editable-content'>{summary}</p>
+            <p className='content'>{summary}</p>
         </div>
     );
 }
@@ -49,7 +49,7 @@ function Experience({ experience }: ExperienceProps) {
             </div>
             {experience.map((job, jobIdx) => {
                 return (
-                    <div className='job-info editable-content' key={jobIdx}>
+                    <div className='job-info' key={jobIdx}>
                         <div className='job-details'>
                             <div className='line-one-details'>
                                 <span className='job-position'>{job.position}</span> <span className='job-date'>{job.start} - {job.end}</span>
@@ -79,7 +79,7 @@ function Contact({ contact }: ContactProps) {
     return (
         <div className='contact component'>
             <h2 className='section-header'>Contact</h2>
-            <div className='contact-info editable-content'>
+            <div className='contact-info'>
                 <div className='contact-detail'>
                     <Icon path={mdiPhone} size={1} color={'#fff'} />
                     <span>{contact.phone}</span>
@@ -101,7 +101,7 @@ function Education({ education }: EducationProps) {
     return (
         <div className='education component'>
             <h2 className='section-header'>Education</h2>
-            <div className='education-info editable-content'>
+            <div className='education-info'>
                 <div>
                     <span className='education-degree'>{education.degree}</span>
                 </div>
