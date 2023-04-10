@@ -1,5 +1,10 @@
+// Resume Types
 interface NameProp {
-    name: string;
+    first_name: string;
+    last_name: string;
+}
+interface NameProps {
+    name: NameProp;
 }
 
 interface SummaryProp {
@@ -42,12 +47,21 @@ interface EducationProps {
 
 interface ResumeProps {
     info: {
-        name: string;
+        name: NameProp;
         contact: ContactProp;
         education: EducationProp;
         summary: string;
         experience: ExperienceProp[];
-    }
+    };
+    xShift: number;
 }
 
-export { NameProp, SummaryProp, ExperienceProp, ExperienceProps, ContactProp, ContactProps, EducationProp, EducationProps, ResumeProps }
+// EditBar Types
+interface EditBarProps {
+    xShift: number;
+    name: NameProp;
+    onNameChange(name: NameProp): void;
+}
+
+// Export Types
+export { NameProp, NameProps, SummaryProp, ExperienceProp, ExperienceProps, ContactProp, ContactProps, EducationProp, EducationProps, ResumeProps, EditBarProps }

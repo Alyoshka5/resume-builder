@@ -1,4 +1,7 @@
-const name = 'John Doe';
+const name = {
+  first_name: 'John',
+  last_name: 'Doe',
+};
 
 const contact = {
     phone: '555-555-5555',

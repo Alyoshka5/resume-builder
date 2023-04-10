@@ -1,13 +1,13 @@
 import '../styles/Resume.css';
 import Icon from '@mdi/react';
 import { mdiPhone, mdiEmailOutline, mdiMapMarker } from '@mdi/js';
-import { NameProp, SummaryProp, ExperienceProps, ContactProps, EducationProps, ResumeProps } from '../types';
+import { NameProps, SummaryProp, ExperienceProps, ContactProps, EducationProps, ResumeProps } from '../types';
 
 
 
-export default function Resume({ info }: ResumeProps) {
+export default function Resume({ info, xShift }: ResumeProps) {
     return (
-        <div className='resume'>
+        <div style={{right: `${xShift}px`}} className='resume'>
             <div className='main-content'>
                 <Name name={info.name} />
                 <Summary summary={info.summary} />
@@ -22,10 +22,10 @@ export default function Resume({ info }: ResumeProps) {
 }
 
 
-function Name({ name }: NameProp) {
+function Name({ name }: NameProps) {
     return (
         <div className='name component'>
-            <h1 className='name-header'>{name}</h1>
+            <h1 className='name-header'>{name.first_name} {name.last_name}</h1>
             <div className='divider'></div>
         </div>
     );

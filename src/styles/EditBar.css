@@ -1,0 +1,6 @@
+.edit-bar {
+    /* display: none; */
+    position: fixed;
+    right: -500px;
+    transition: 1s ease
+}
