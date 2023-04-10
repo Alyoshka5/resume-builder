@@ -1,6 +1,20 @@
 .edit-bar {
-    /* display: none; */
+    background-color: aquamarine;
+    height: 100%;
+    width: 43rem;
     position: fixed;
     right: -500px;
-    transition: 1s ease
+    top: 0;
+    transition: 1s ease;
+    display: flex;
+}
+
+.tags {
+    background-color: blueviolet;
+    width: 13rem;
+}
+
+.tag:hover {
+    cursor: pointer;
+    background-color: blue;
 }

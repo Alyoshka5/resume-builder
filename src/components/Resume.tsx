@@ -5,11 +5,11 @@ import { NameProps, SummaryProp, ExperienceProps, ContactProps, EducationProps, 
 
 
 
-export default function Resume({ info, xShift }: ResumeProps) {
+export default function Resume({ info, xShift, editBarOpen, openEditBar }: ResumeProps) {
     return (
-        <div style={{right: `${xShift}px`}} className='resume'>
+        <div style={{right: `${xShift === 0 ? 0 : xShift - 10}rem`}} className='resume'>
             <div className='main-content'>
-                <Name name={info.name} />
+                <Name name={info.name} editBarOpen={editBarOpen} openEditBar={openEditBar} />
                 <Summary summary={info.summary} />
                 <Experience experience={info.experience} />
             </div>
@@ -22,10 +22,13 @@ export default function Resume({ info, xShift }: ResumeProps) {
 }
 
 
-function Name({ name }: NameProps) {
+function Name({ name, editBarOpen, openEditBar }: NameProps) {
     return (
         <div className='name component'>
-            <h1 className='name-header'>{name.first_name} {name.last_name}</h1>
+            <h1 className='name-header' onClick={() => {
+                openEditBar(!editBarOpen)
+                console.log(editBarOpen);
+            }} >{name.first_name} {name.last_name}</h1>
             <div className='divider'></div>
         </div>
     );
