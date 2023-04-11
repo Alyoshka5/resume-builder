@@ -11,16 +11,16 @@ function App() {
   const [summary, setSummary] = useState(personInfo.summary);
   const [experience, setExperience] = useState(personInfo.experience);
   const [xShift, setXShift] = useState(0);
-  const [editBarOpen, setEditBarOpen] = useState(false);
+  const [editBarToggle, setEditBarToggle] = useState(false);
 
   useEffect(() => {
-    setXShift(editBarOpen ? 30 : 0);
-  }, [editBarOpen])
+    setXShift(editBarToggle ? 30 : 0);
+  }, [editBarToggle])
 
   return (
     <div className='App' style={{overflow: 'hidden'}}>
-      <Resume editBarOpen={editBarOpen} openEditBar={setEditBarOpen} info={{name, contact, summary, education, experience}} xShift={xShift} />
-      <EditBar name={name} onNameChange={setName} xShift={xShift} switchXShift={setXShift} />
+      <Resume editBarToggle={editBarToggle} setEditBarToggle={setEditBarToggle} info={{name, contact, summary, education, experience}} xShift={xShift} />
+      <EditBar name={name} onNameChange={setName} xShift={xShift} setEditBarToggle={setEditBarToggle} />
     </div>
   );
 }

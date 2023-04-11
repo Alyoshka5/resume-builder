@@ -1,5 +1,5 @@
 // Resume Types
-type openEditBar = (editBarOpen: boolean) => void;
+type setEditBarToggle = (editBarOpen: boolean) => void;
 
 interface NameProp {
     first_name: string;
@@ -7,8 +7,7 @@ interface NameProp {
 }
 interface NameProps {
     name: NameProp;
-    editBarOpen: boolean;
-    openEditBar: openEditBar;
+    setEditBarToggle: setEditBarToggle;
 }
 
 interface SummaryProp {
@@ -58,16 +57,16 @@ interface ResumeProps {
         experience: ExperienceProp[];
     };
     xShift: number;
-    editBarOpen: boolean;
-    openEditBar(editBarOpen: boolean): void;
+    editBarToggle: boolean;
+    setEditBarToggle(editBarToggle: boolean): void;
 }
 
 // EditBar Types
 interface EditBarProps {
-    xShift: number;
     name: NameProp;
     onNameChange(name: NameProp): void;
-    switchXShift(xShift: number): void;
+    xShift: number;
+    setEditBarToggle(editBarToggle: boolean): void;
 }
 
 // Export Types

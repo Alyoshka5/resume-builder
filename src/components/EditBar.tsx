@@ -1,14 +1,13 @@
 import '../styles/EditBar.css';
 import { EditBarProps } from '../types';
 
-export default function EditBar({ xShift, name, onNameChange, switchXShift }: EditBarProps) {
+export default function EditBar({ name, onNameChange, xShift, setEditBarToggle }: EditBarProps) {
     return (
         <div style={{right: `${xShift - 31}rem`}} className="edit-bar">
             <div className="tags">
-                <div className="tag" onClick={() => {
-                    switchXShift(xShift === 0 ? 30 : 0)
-                }}>Name</div>
+                <div className="tag" onClick={() => { setEditBarToggle(true) }}>Name</div>
             </div>
+            <button className="close-btn" onClick={() => { setEditBarToggle(false) }}>X</button>
             <div className="forms">
                 <form className="name-form">
                     <label htmlFor="first-name">First name</label>
