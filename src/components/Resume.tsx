@@ -2,12 +2,13 @@ import '../styles/Resume.css';
 import Icon from '@mdi/react';
 import { mdiPhone, mdiEmailOutline, mdiMapMarker } from '@mdi/js';
 import { NameProps, SummaryProp, ExperienceProps, ContactProps, EducationProps, ResumeProps } from '../types';
+import React from 'react';
 
 
 
-export default function Resume({ info, xShift, editBarToggle, setEditBarToggle }: ResumeProps) {
+export default function Resume({ info, xShift, editBarToggle, setEditBarToggle, themeColor }: ResumeProps) {
     return (
-        <div style={{right: `${xShift === 0 ? 0 : xShift - 10}rem`}} className='resume'>
+        <div style={{right: `${xShift === 0 ? 0 : xShift - 10}rem`, '--theme-color': themeColor} as React.CSSProperties} className='resume'>
             <div className='main-content'>
                 <Name name={info.name} setEditBarToggle={setEditBarToggle} />
                 <Summary summary={info.summary} />

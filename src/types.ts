@@ -59,14 +59,18 @@ interface ResumeProps {
     xShift: number;
     editBarToggle: boolean;
     setEditBarToggle(editBarToggle: boolean): void;
+    themeColor: string;
 }
 
 // EditBar Types
 interface EditBarProps {
+    currentEdit: string;
     name: NameProp;
     onNameChange(name: NameProp): void;
     xShift: number;
     setEditBarToggle(editBarToggle: boolean): void;
+    themeColor: string;
+    setThemeColor(themeColor: string): void;
 }
 
 // Export Types
