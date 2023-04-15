@@ -1,17 +1,16 @@
 import '../styles/Resume.css';
 import Icon from '@mdi/react';
 import { mdiPhone, mdiEmailOutline, mdiMapMarker } from '@mdi/js';
-import { NameProps, SummaryProp, ExperienceProps, ContactProps, EducationProps, ResumeProps } from '../types';
+import { NameProps, SummaryProps, ExperienceProps, ContactProps, EducationProps, ResumeProps } from '../types';
 import React from 'react';
 
 
-
-export default function Resume({ info, xShift, editBarToggle, setEditBarToggle, themeColor }: ResumeProps) {
+export default function Resume({ info, xShift, editBarToggle, setEditBarToggle, setCurrentEdit, themeColor }: ResumeProps) {
     return (
         <div style={{right: `${xShift === 0 ? 0 : xShift - 10}rem`, '--theme-color': themeColor} as React.CSSProperties} className='resume'>
             <div className='main-content'>
-                <Name name={info.name} setEditBarToggle={setEditBarToggle} />
-                <Summary summary={info.summary} />
+                <Name name={info.name} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} />
+                <Summary summary={info.summary} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} />
                 <Experience experience={info.experience} />
             </div>
             <div className='secondary-content'>
@@ -23,10 +22,13 @@ export default function Resume({ info, xShift, editBarToggle, setEditBarToggle, 
 }
 
 
-function Name({ name, setEditBarToggle }: NameProps) {
+function Name({ name, setEditBarToggle, setCurrentEdit }: NameProps) {
     return (
         <div className='name component'>
-            <h1 className='name-header' onClick={() => { setEditBarToggle(true) }} >
+            <h1 className='name-header' onClick={() => { 
+                setEditBarToggle(true);
+                setCurrentEdit('name_theme')
+            }} >
                 {name.first_name} {name.last_name}
             </h1>
             <div className='divider'></div>
@@ -34,10 +36,13 @@ function Name({ name, setEditBarToggle }: NameProps) {
     );
 }
 
-function Summary({ summary }: SummaryProp) {
+function Summary({ summary, setEditBarToggle, setCurrentEdit }: SummaryProps) {
     return (
-        <div className='summary component'>
-            <h2 className='section-header'>Summary</h2>
+        <div className='summary component' onClick={() => { 
+            setEditBarToggle(true);
+            setCurrentEdit('summary')
+        }}>
+            <h2 className='section-header' >Summary</h2>
             <p className='content'>{summary}</p>
         </div>
     );

@@ -29,9 +29,12 @@
     align-items: center;
     gap: 1rem;
 }
-
 .tag:hover {
     cursor: pointer;
+    background-color: #383838;
+}
+
+.tag.active {
     background-color: #383838;
 }
 
@@ -106,4 +109,14 @@
 
 .edit-form input[type="color"]:hover {
     opacity: 0.8;
+}
+
+.edit-form textarea {
+    width: 100%;
+    height: 15rem;
+    padding: 0.5rem;
+    border: 1px solid #000;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    resize: none;
 }

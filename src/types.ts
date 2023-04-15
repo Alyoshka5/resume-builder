@@ -1,5 +1,4 @@
 // Resume Types
-type setEditBarToggle = (editBarOpen: boolean) => void;
 
 interface NameProp {
     first_name: string;
@@ -7,11 +6,17 @@ interface NameProp {
 }
 interface NameProps {
     name: NameProp;
-    setEditBarToggle: setEditBarToggle;
+    setEditBarToggle(editBarOpen: boolean): void;
+    setCurrentEdit(currentEdit: string): void;
 }
 
 interface SummaryProp {
     summary: string;
+}
+interface SummaryProps {
+    summary: string;
+    setEditBarToggle(editBarOpen: boolean): void;
+    setCurrentEdit(currentEdit: string): void;
 }
 
 interface ExperienceProp {
@@ -59,19 +64,23 @@ interface ResumeProps {
     xShift: number;
     editBarToggle: boolean;
     setEditBarToggle(editBarToggle: boolean): void;
+    setCurrentEdit(currentEdit: string): void
     themeColor: string;
 }
 
 // EditBar Types
 interface EditBarProps {
-    currentEdit: string;
     name: NameProp;
     onNameChange(name: NameProp): void;
-    xShift: number;
-    setEditBarToggle(editBarToggle: boolean): void;
     themeColor: string;
     setThemeColor(themeColor: string): void;
+    summary: string;
+    onSummaryChange(summary: string): void;
+    xShift: number;
+    setEditBarToggle(editBarToggle: boolean): void;
+    currentEdit: string;
+    setCurrentEdit(currentEdit: string): void;
 }
 
 // Export Types
-export { NameProp, NameProps, SummaryProp, ExperienceProp, ExperienceProps, ContactProp, ContactProps, EducationProp, EducationProps, ResumeProps, EditBarProps }
+export { NameProp, NameProps, SummaryProp, SummaryProps, ExperienceProp, ExperienceProps, ContactProp, ContactProps, EducationProp, EducationProps, ResumeProps, EditBarProps }

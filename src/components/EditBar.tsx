@@ -1,7 +1,7 @@
 import '../styles/EditBar.css';
 import { EditBarProps } from '../types';
 import Icon from '@mdi/react';
-import { mdiClose, mdiAccount, mdiArrowRightBoldHexagonOutline } from '@mdi/js';
+import { mdiClose, mdiAccountOutline, mdiMessageOutline } from '@mdi/js';
 
 const hexToRgb = (hex: string) => {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -13,9 +13,15 @@ const rgbToHex = (rgb: string) => {
     return result ? `#${parseInt(result[1]).toString(16)}${parseInt(result[2]).toString(16)}${parseInt(result[3]).toString(16)}` : '';
 }
 
-export default function EditBar({ currentEdit, name, onNameChange, xShift, setEditBarToggle, themeColor, setThemeColor }: EditBarProps) {
+export default function EditBar({
+    name, onNameChange,
+    themeColor, setThemeColor,
+    summary, onSummaryChange, 
+    xShift, setEditBarToggle,
+    currentEdit, setCurrentEdit,
+    }: EditBarProps) {
     const editForms = {
-        'name-theme': (
+        name_theme: (
             <form className="edit-form name-form">
                 <div className='input-container'>
                     <label htmlFor="first-name">First name</label>
@@ -30,16 +36,35 @@ export default function EditBar({ currentEdit, name, onNameChange, xShift, setEd
                     <input type="color" value={rgbToHex(`rgb(${themeColor})`)} name="theme-color" onChange={(e) => setThemeColor(hexToRgb(e.target.value))} />
                 </div>
             </form>
-        )
+        ), 
+        summary: (
+            <form className="edit-form summary-form">
+                <div className='input-container'>
+                    <label htmlFor="summary">Summary</label>
+                    <textarea value={summary} name="summary" cols={30} rows={10} onChange={(e) => onSummaryChange(e.target.value)} />
+                </div>
+            </form>
+        ),
     }
     
     return (
         <div style={{right: `${xShift - 31}rem`}} className="edit-bar">
             <div className="tags">
-                <div className="tag" onClick={() => { setEditBarToggle(true) }}>
-                    <Icon path={mdiAccount} size={1.2} />
+                <div className={`tag ${currentEdit === 'name_theme' ? 'active' : ''}`} onClick={() => { 
+                    setEditBarToggle(true);
+                    setCurrentEdit('name_theme');
+                }}>
+                    <Icon path={mdiAccountOutline} size={1.2} />
                     <span>Name & Theme</span>
                 </div>
+                <div className={`tag ${currentEdit === 'summary' ? 'active' : ''}`} onClick={() => { 
+                    setEditBarToggle(true);
+                    setCurrentEdit('summary');
+                }}>
+                    <Icon path={mdiMessageOutline} size={1.2} />
+                    <span>Summary</span>
+                </div>
+
             </div>
             <div className='edit-section'>
                 <div className='close-btn' onClick={() => { setEditBarToggle(false) }}>
