@@ -1,7 +1,7 @@
 import '../styles/EditBar.css';
 import { EditBarProps } from '../types';
 import Icon from '@mdi/react';
-import { mdiClose, mdiAccountOutline, mdiMessageOutline } from '@mdi/js';
+import { mdiClose, mdiAccountOutline, mdiMessageOutline, mdiBriefcaseOutline, mdiEmailOutline, mdiSchoolOutline, mdiCardAccountMail } from '@mdi/js';
 
 const hexToRgb = (hex: string) => {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -57,6 +57,7 @@ export default function EditBar({
                     <Icon path={mdiAccountOutline} size={1.2} />
                     <span>Name & Theme</span>
                 </div>
+
                 <div className={`tag ${currentEdit === 'summary' ? 'active' : ''}`} onClick={() => { 
                     setEditBarToggle(true);
                     setCurrentEdit('summary');
@@ -65,6 +66,29 @@ export default function EditBar({
                     <span>Summary</span>
                 </div>
 
+                <div className={`tag ${currentEdit === 'experience' ? 'active' : ''}`} onClick={() => { 
+                    setEditBarToggle(true);
+                    setCurrentEdit('experience');
+                }}>
+                    <Icon path={mdiBriefcaseOutline} size={1.2} />
+                    <span>Experience</span>
+                </div>
+
+                <div className={`tag ${currentEdit === 'contact' ? 'active' : ''}`} onClick={() => { 
+                    setEditBarToggle(true);
+                    setCurrentEdit('contact');
+                }}>
+                    <Icon path={mdiEmailOutline} size={1.2} />
+                    <span>Contact</span>
+                </div>
+
+                <div className={`tag ${currentEdit === 'education' ? 'active' : ''}`} onClick={() => { 
+                    setEditBarToggle(true);
+                    setCurrentEdit('education');
+                }}>
+                    <Icon path={mdiSchoolOutline} size={1.2} />
+                    <span>Education</span>
+                </div>
             </div>
             <div className='edit-section'>
                 <div className='close-btn' onClick={() => { setEditBarToggle(false) }}>
