@@ -76,6 +76,8 @@ interface EditBarProps {
     setThemeColor(themeColor: string): void;
     summary: string;
     onSummaryChange(summary: string): void;
+    experience: ExperienceProp[];
+    onExperienceChange(experience: ExperienceProp[]): void;
     xShift: number;
     setEditBarToggle(editBarToggle: boolean): void;
     currentEdit: string;

@@ -26,6 +26,7 @@ function App() {
         name={name} onNameChange={setName}
         themeColor={themeColor} setThemeColor={setThemeColor}
         summary={summary} onSummaryChange={setSummary}
+        experience={experience} onExperienceChange={setExperience}
         xShift={xShift} setEditBarToggle={setEditBarToggle}
         currentEdit={currentEdit} setCurrentEdit={setCurrentEdit}
       />
