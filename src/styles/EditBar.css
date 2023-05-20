@@ -72,7 +72,11 @@
     margin: 0;
 }
 
-.edit-form input[type="text"] {
+.edit-form input[type="text"], 
+.edit-form input[type="phone"], 
+.edit-form input[type="email"], 
+.edit-form input[type="address"],
+.edit-form input[type="month"] {
     font-size: 1rem;
     font-family: inherit;
     width: 70%;

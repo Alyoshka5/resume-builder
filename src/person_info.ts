@@ -13,7 +13,7 @@ const education = {
     school: 'Example University',
     degree: 'B.S. Computer Science',
     location: 'Example, CA',
-    graduation: 'May 2021',
+    graduation: '2021-05',
 };
 
 const summary = `

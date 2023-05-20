@@ -17,13 +17,15 @@ const rgbToHex = (rgb: string) => {
 
 
 export default function EditBar({
-    name, onNameChange,
-    themeColor, setThemeColor,
-    experience, onExperienceChange,
-    summary, onSummaryChange, 
-    xShift, setEditBarToggle,
-    currentEdit, setCurrentEdit,
-    addJobButtonRef
+        name, onNameChange,
+        themeColor, setThemeColor,
+        experience, onExperienceChange,
+        summary, onSummaryChange, 
+        contact, onContactChange,
+        education, onEducationChange, 
+        xShift, setEditBarToggle,
+        currentEdit, setCurrentEdit,
+        addJobButtonRef
     }: EditBarProps) {
     const editForms = {
         name_theme: (
@@ -51,7 +53,6 @@ export default function EditBar({
             </form>
         ),
         experience: (
-            // add new experience and remove experience
             <form className="edit-form experience-form">
                 {experience.map((job, jobIdx) => {
                     return (
@@ -174,6 +175,58 @@ export default function EditBar({
                 </div>
             </form>
         ),
+        contact: (
+            <form className="edit-form contact-form">
+                <div className='input-container'>
+                    <label htmlFor="phone">Phone</label>
+                    <input type="phone" value={contact.phone} name="phone" onChange={(e) => {
+                        onContactChange({...contact, phone: e.target.value});
+                    }} />
+                </div>
+                <div className='input-container'>
+                    <label htmlFor="email">Email</label>
+                    <input type="email" value={contact.email} name="email" onChange={(e) => {
+                        onContactChange({...contact, email: e.target.value});
+                    }} />
+                </div>
+                <div className='input-container'>
+                    <label htmlFor="address">Address</label>
+                    <input type="address" value={contact.address} name="address" onChange={(e) => {
+                        onContactChange({...contact, address: e.target.value});
+                    }} />
+                </div>
+            </form>
+        ),
+        education: (
+            <form className="edit-form education-form">
+                <div className="input-container">
+                    <label htmlFor="school">School</label>
+                    <input type="text" value={education.school} name="school" onChange={(e) => {
+                        onEducationChange({...education, school: e.target.value});
+                    }} />
+                </div>
+                <div className="input-container">
+                    <label htmlFor="degree">Degree</label>
+                    <input type="text" value={education.degree} name="degree" onChange={(e) => {
+                        onEducationChange({...education, degree: e.target.value});
+                    }} />
+                </div>
+                <div className="input-container">
+                    <label htmlFor="location">Location</label>
+                    <input type="text" value={education.location} name="location" onChange={(e) => {
+                        onEducationChange({...education, location: e.target.value});
+                    }} />
+                </div>
+                <div className="input-container">
+                    <label htmlFor="graduation">Graduation</label>
+                    <div className="input-container">
+                        <input type="month" value={education.graduation} name='graudation' onChange={(e) => {
+                        onEducationChange({...education, graduation: e.target.value});
+                    }} />
+                    </div>
+                </div>
+            </form>
+        )
     }
     
     return (

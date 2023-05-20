@@ -29,19 +29,22 @@ function App() {
 
   return (
     <div className='App' style={{overflow: 'hidden'}}>
-      <Resume editBarToggle={editBarToggle} 
-      setEditBarToggle={setEditBarToggle} 
-      setCurrentEdit={setCurrentEdit} 
-      info={{name, contact, summary, education, experience}} 
-      xShift={xShift} themeColor={themeColor} 
-      onExperienceChange={setExperience} 
-      scrollToAddJobButton={scrollToAddJobButton}
+      <Resume 
+        editBarToggle={editBarToggle} 
+        setEditBarToggle={setEditBarToggle} 
+        setCurrentEdit={setCurrentEdit} 
+        info={{name, contact, summary, education, experience}} 
+        xShift={xShift} themeColor={themeColor} 
+        onExperienceChange={setExperience} 
+        scrollToAddJobButton={scrollToAddJobButton}
       />
       <EditBar 
         name={name} onNameChange={setName}
         themeColor={themeColor} setThemeColor={setThemeColor}
         summary={summary} onSummaryChange={setSummary}
         experience={experience} onExperienceChange={setExperience}
+        contact={contact} onContactChange={setContact} 
+        education={education} onEducationChange={setEducation} 
         xShift={xShift} setEditBarToggle={setEditBarToggle}
         currentEdit={currentEdit} setCurrentEdit={setCurrentEdit}
         addJobButtonRef={addJobButtonRef}

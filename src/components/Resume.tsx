@@ -14,8 +14,8 @@ export default function Resume({ info, xShift, setEditBarToggle, setCurrentEdit,
                 <Experience experience={info.experience} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} onExperienceChange={onExperienceChange} scrollToAddJobButton={scrollToAddJobButton} />
             </div>
             <div className='secondary-content'>
-                <Contact contact={info.contact} />
-                <Education education={info.education} />
+                <Contact contact={info.contact} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} />
+                <Education education={info.education} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} />
             </div>
         </div>
     );
@@ -40,7 +40,7 @@ function Summary({ summary, setEditBarToggle, setCurrentEdit }: SummaryProps) {
     return (
         <div className='summary component' onClick={() => { 
             setEditBarToggle(true);
-            setCurrentEdit('summary')
+            setCurrentEdit('summary');
         }}>
             <h2 className='section-header' >Summary</h2>
             <p className='content'>{summary}</p>
@@ -123,9 +123,12 @@ function Experience({ experience, setCurrentEdit, setEditBarToggle, onExperience
     );
 }
 
-function Contact({ contact }: ContactProps) {
+function Contact({ contact, setEditBarToggle, setCurrentEdit }: ContactProps) {
     return (
-        <div className='contact component'>
+        <div className='contact component' onClick={() => { 
+            setEditBarToggle(true);
+            setCurrentEdit('contact');
+        }}>
             <h2 className='section-header'>Contact</h2>
             <div className='contact-info'>
                 <div className='contact-detail'>
@@ -145,16 +148,39 @@ function Contact({ contact }: ContactProps) {
     );
 }
 
-function Education({ education }: EducationProps) {
+function Education({ education, setEditBarToggle, setCurrentEdit }: EducationProps) {
+    const numMonthToMonth: { [key: string]: string } = {
+        '01': 'Jan',
+        '02': 'Feb',
+        '03': 'Mar',
+        '04': 'Apr',
+        '05': 'May',
+        '06': 'Jun',
+        '07': 'Jul',
+        '08': 'Aug',
+        '09': 'Sep',
+        '10': 'Oct',
+        '11': 'Nov',
+        '12': 'Dec',
+    }
+
+    const inputDateToDisplayDate = (date: string) => {
+        const dateArr = date.split('-');
+        return `${numMonthToMonth[dateArr[1]]} ${dateArr[0]}`;
+    }
+
     return (
-        <div className='education component'>
+        <div className='education component' onClick={() => { 
+            setEditBarToggle(true);
+            setCurrentEdit('education');
+        }}>
             <h2 className='section-header'>Education</h2>
             <div className='education-info'>
                 <div>
                     <span className='education-degree'>{education.degree}</span>
                 </div>
                 <div>
-                    <span className='education-graduation'>Expected in {education.graduation}</span>
+                    <span className='education-graduation'>Expected in {inputDateToDisplayDate(education.graduation)}</span>
                 </div>
                 <div>
                     <span className='education-school'>{education.school}</span> - <span className='educaiton-location'>{education.location}</span>

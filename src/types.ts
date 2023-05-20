@@ -55,6 +55,8 @@ interface ContactProp {
 }
 interface ContactProps {
     contact: ContactProp;
+    setEditBarToggle(editBarOpen: boolean): void;
+    setCurrentEdit(currentEdit: string): void;
 }
 
 interface EducationProp {
@@ -66,6 +68,8 @@ interface EducationProp {
 
 interface EducationProps {
     education: EducationProp;
+    setEditBarToggle(editBarOpen: boolean): void;
+    setCurrentEdit(currentEdit: string): void;
 }
 
 
@@ -96,6 +100,10 @@ interface EditBarProps {
     onSummaryChange(summary: string): void;
     experience: ExperienceProp[];
     onExperienceChange(experience: ExperienceProp[]): void;
+    contact: ContactProp;
+    onContactChange(contact: ContactProp): void;
+    education: EducationProp;
+    onEducationChange(education: EducationProp): void;
     xShift: number;
     setEditBarToggle(editBarToggle: boolean): void;
     currentEdit: string;
