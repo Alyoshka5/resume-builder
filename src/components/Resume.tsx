@@ -5,13 +5,13 @@ import { NameProps, SummaryProps, ExperienceProps, ContactProps, EducationProps,
 import React from 'react';
 
 
-export default function Resume({ info, xShift, editBarToggle, setEditBarToggle, setCurrentEdit, themeColor }: ResumeProps) {
+export default function Resume({ info, xShift, setEditBarToggle, setCurrentEdit, themeColor, onExperienceChange, scrollToAddJobButton }: ResumeProps) {
     return (
         <div style={{right: `${xShift === 0 ? 0 : xShift - 10}rem`, '--theme-color': themeColor} as React.CSSProperties} className='resume'>
             <div className='main-content'>
                 <Name name={info.name} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} />
                 <Summary summary={info.summary} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} />
-                <Experience experience={info.experience} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} />
+                <Experience experience={info.experience} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} onExperienceChange={onExperienceChange} scrollToAddJobButton={scrollToAddJobButton} />
             </div>
             <div className='secondary-content'>
                 <Contact contact={info.contact} />
@@ -48,7 +48,7 @@ function Summary({ summary, setEditBarToggle, setCurrentEdit }: SummaryProps) {
     );
 }
 
-function Experience({ experience, setCurrentEdit, setEditBarToggle }: ExperienceProps) {
+function Experience({ experience, setCurrentEdit, setEditBarToggle, onExperienceChange, scrollToAddJobButton }: ExperienceProps) {
     const monthShortener: { [key: string]: string } = {
         'January': 'Jan',
         'February': 'Feb',
@@ -69,7 +69,28 @@ function Experience({ experience, setCurrentEdit, setEditBarToggle }: Experience
         <div className='experience component'>
             <div className='section-header-container'>
                 <h2 className='section-header'>Experience</h2>
-                <button className='add-experience-btn'>Add Experience</button>
+                <button className='add-experience-btn' onClick={e => {
+                        e.preventDefault();
+                        const newExperience = [...experience];
+                        newExperience.push({
+                            position: '',
+                            company: '',
+                            location: '',
+                            start: {
+                                month: 'January',
+                                year: new Date().getFullYear().toString(),
+                            },
+                            end: {
+                                month: 'Present',
+                                year: '',
+                            },
+                            description: [''],
+                        });
+                        onExperienceChange(newExperience);
+                        scrollToAddJobButton();
+                        setCurrentEdit('experience');
+                        setEditBarToggle(true);
+                    }}>Add Experience</button>
             </div>
             {experience.map((job, jobIdx) => {
                 return (
