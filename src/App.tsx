@@ -1,7 +1,7 @@
 import './App.css';
 import Resume from './components/Resume';
 import EditBar from './components/EditBar'
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import personInfo from './person_info';
 
 function App() {
@@ -17,7 +17,8 @@ function App() {
 
   useEffect(() => {
     setXShift(editBarToggle ? 30 : 0);
-  }, [editBarToggle])
+  }, [editBarToggle]);
+
 
   return (
     <div className='App' style={{overflow: 'hidden'}}>

@@ -19,17 +19,31 @@ interface SummaryProps {
     setCurrentEdit(currentEdit: string): void;
 }
 
+interface DateProp {
+    month: string;
+    year: string;
+}
+
+interface DateInputProp {
+    experience: ExperienceProp[],
+    onExperienceChange(experience: ExperienceProp[]): void,
+    jobIdx: number,
+    startOrEnd: string;
+}
+
 interface ExperienceProp {
     position: string;
     company: string;
     location: string;
-    start: string;
-    end: string;
+    start: DateProp;
+    end: DateProp;
     description: string[];
 }
 
 interface ExperienceProps {
     experience: ExperienceProp[];
+    setEditBarToggle(editBarOpen: boolean): void;
+    setCurrentEdit(currentEdit: string): void;
 }
 
 interface ContactProp {
@@ -85,4 +99,4 @@ interface EditBarProps {
 }
 
 // Export Types
-export { NameProp, NameProps, SummaryProp, SummaryProps, ExperienceProp, ExperienceProps, ContactProp, ContactProps, EducationProp, EducationProps, ResumeProps, EditBarProps }
+export { NameProp, NameProps, SummaryProp, SummaryProps, DateInputProp, ExperienceProp, ExperienceProps, ContactProp, ContactProps, EducationProp, EducationProps, ResumeProps, EditBarProps }

@@ -25,8 +25,14 @@ const experience = [
     position: 'Front End Developer',
     company: 'Example Company',
     location: 'Seattle, WA',
-    start: 'May 2020',
-    end: 'May 2021',
+    start: {
+      month: 'May',
+      year: '2021',
+    },
+    end: {
+      month: 'August',
+      year: '2021',
+    },
     description: [
       'Developed a full stack application using React, Node.js, Express, and PostgreSQL.',
       'Implemented a RESTful API to allow users to create, read, update, and delete data.',
@@ -37,8 +43,14 @@ const experience = [
     position: 'Full Stack Developer',
     company: 'Example Company',
     location: 'Example, CA',
-    start: 'May 2021',
-    end: 'Present',
+    start: {
+      month: 'September',
+      year: '2020',
+    },
+    end: {
+      month: 'Present',
+      year: '',
+    },
     description: [
       'Developed a full stack application using React, Node.js, Express, and PostgreSQL.',
       'Implemented a RESTful API to allow users to create, read, update, and delete data.',

@@ -11,7 +11,7 @@ export default function Resume({ info, xShift, editBarToggle, setEditBarToggle, 
             <div className='main-content'>
                 <Name name={info.name} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} />
                 <Summary summary={info.summary} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} />
-                <Experience experience={info.experience} />
+                <Experience experience={info.experience} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} />
             </div>
             <div className='secondary-content'>
                 <Contact contact={info.contact} />
@@ -48,7 +48,23 @@ function Summary({ summary, setEditBarToggle, setCurrentEdit }: SummaryProps) {
     );
 }
 
-function Experience({ experience }: ExperienceProps) {
+function Experience({ experience, setCurrentEdit, setEditBarToggle }: ExperienceProps) {
+    const monthShortener: { [key: string]: string } = {
+        'January': 'Jan',
+        'February': 'Feb',
+        'March': 'Mar',
+        'April': 'Apr',
+        'May': 'May',
+        'June': 'Jun',
+        'July': 'Jul',
+        'August': 'Aug',
+        'September': 'Sep',
+        'October': 'Oct',
+        'November': 'Nov',
+        'December': 'Dec',
+        'Present': 'Present'
+    }
+
     return (
         <div className='experience component'>
             <div className='section-header-container'>
@@ -57,10 +73,13 @@ function Experience({ experience }: ExperienceProps) {
             </div>
             {experience.map((job, jobIdx) => {
                 return (
-                    <div className='job-info' key={jobIdx}>
+                    <div className='job-info' key={jobIdx} onClick={() => { 
+                        setCurrentEdit('experience');
+                        setEditBarToggle(true);
+                    }}>
                         <div className='job-details'>
                             <div className='line-one-details'>
-                                <span className='job-position'>{job.position}</span> <span className='job-date'>{job.start} - {job.end}</span>
+                                <span className='job-position'>{job.position}</span> <span className='job-date'>{monthShortener[job.start.month]} {job.start.year} - {monthShortener[job.end.month]} {job.end.year}</span>
                             </div>
                             <div>
                                 <span className='job-company'>{job.company},</span> <span className='job-location'>{job.location}</span>

@@ -1,5 +1,6 @@
+import { useEffect } from 'react';
 import '../styles/EditBar.css';
-import { EditBarProps, ExperienceProp } from '../types';
+import { EditBarProps, DateInputProp } from '../types';
 import Icon from '@mdi/react';
 import { mdiClose, mdiAccountOutline, mdiMessageOutline, mdiBriefcaseOutline, mdiEmailOutline, mdiSchoolOutline, mdiDeleteOutline } from '@mdi/js';
 
@@ -53,10 +54,14 @@ export default function EditBar({
             <form className="edit-form experience-form">
                 {experience.map((job, jobIdx) => {
                     return (
-                        <div className="job-container">
+                        <div className="job-container" key={jobIdx}>
                             <div className="job-header-container">
                                 <h2 className='job-header'>Job {jobIdx + 1}</h2>
-                                <div className="remove-job-btn">
+                                <div className="remove-job-btn" onClick={() => {
+                                    const newExperience = [...experience];
+                                    newExperience.splice(jobIdx, 1);
+                                    onExperienceChange(newExperience);
+                                }}>
                                     <Icon path={mdiDeleteOutline} size={1.05}></Icon>
                                 </div>
                             </div>
@@ -71,27 +76,40 @@ export default function EditBar({
                                 </div>
                                 <div className='input-container'>
                                     <label htmlFor="company-name">Employer</label>
-                                    <input type="text" value={job.company} name="company-name" onChange={(e) => onExperienceChange(experience)} />
+                                    <input type="text" value={job.company} name="company-name" onChange={(e) => {
+                                        const newExperience = [...experience];
+                                        newExperience[jobIdx].company = e.target.value;
+                                        onExperienceChange(newExperience);
+                                    }} />
                                 </div>
                                 <div className='input-container'>
                                     <label htmlFor="job-location">Location</label>
-                                    <input type="text" value={job.location} name="job-location" onChange={(e) => onExperienceChange(experience)} />
+                                    <input type="text" value={job.location} name="job-location" onChange={(e) => {
+                                        const newExperience = [...experience];
+                                        newExperience[jobIdx].location = e.target.value;
+                                        onExperienceChange(newExperience);
+                                    }} />
                                 </div>
                                 <div className='input-container'>
                                     <label htmlFor="job-start">Start Date</label>
                                     <div className='date-input-container'>
-                                        <MonthDropdown />
-                                        <YearDropdown />
+                                        <MonthDropdown experience={experience} onExperienceChange={onExperienceChange} jobIdx={jobIdx} startOrEnd="start" />
+                                        <YearDropdown experience={experience} onExperienceChange={onExperienceChange} jobIdx={jobIdx} startOrEnd="start" />
                                     </div>
                                 </div>
                                 <div className='input-container'>
                                     <label htmlFor="job-end">End Date</label>
                                     <div className="date-input-container">
-                                        <MonthDropdown />
-                                        <YearDropdown />
+                                        <MonthDropdown experience={experience} onExperienceChange={onExperienceChange} jobIdx={jobIdx} startOrEnd="end" />
+                                        <YearDropdown experience={experience} onExperienceChange={onExperienceChange} jobIdx={jobIdx} startOrEnd="end" />
                                     </div>
                                     <div className='current-job-container'>
-                                        <input type="checkbox" name="job-end" id="job-end" />
+                                        <input type="checkbox" name="job-end" checked={experience[jobIdx].end.month === 'Present'} onChange={e => {
+                                            const newExperience = [...experience];
+                                            newExperience[jobIdx].end.month = e.target.checked ? 'Present' : 'January';
+                                            newExperience[jobIdx].end.year = e.target.checked ? '' : new Date().getFullYear().toString();
+                                            onExperienceChange(newExperience);
+                                        }} />
                                         <label htmlFor="job-end">I currently work here</label>
                                     </div>
                                 </div>
@@ -100,7 +118,7 @@ export default function EditBar({
                                         {job.description.map((desc, descIdx) => {
                                             return (
                                                 <div key={descIdx} className="job-desc-container">
-                                                    <textarea className='job-description' value={desc} name="job-description" onChange={(e) => {
+                                                    <textarea className='job-description' value={desc} name="job-description" autoFocus={desc === ''} onChange={(e) => {
                                                         const textarea = e.target as HTMLTextAreaElement;
                                                         textarea.style.height = "auto";
                                                         textarea.style.height = textarea.scrollHeight + "px";
@@ -108,14 +126,23 @@ export default function EditBar({
                                                         newExperience[jobIdx].description[descIdx] = e.target.value;
                                                         onExperienceChange(newExperience);
                                                     }} />
-                                                    <div className="delete-btn" onClick={() => {}}>
+                                                    <div className="delete-btn" onClick={() => {
+                                                        const newExperience = [...experience];
+                                                        newExperience[jobIdx].description.splice(descIdx, 1);
+                                                        onExperienceChange(newExperience);
+                                                    }}>
                                                         <Icon path={mdiDeleteOutline} size={1.05}></Icon>
                                                     </div>
                                                 </div>
-                                            )
+                                            );
                                         })}
                                     <div className="add-point-btn-container">
-                                        <button className='add-point-btn'>+ Add point</button>
+                                        <button className='add-point-btn' onClick={e => {
+                                            e.preventDefault();
+                                            const newExperience = [...experience];
+                                            newExperience[jobIdx].description.push('');
+                                            onExperienceChange(newExperience);
+                                        }}>+ Add point</button>
                                     </div>
                                 </div>
                             </div>
@@ -124,15 +151,28 @@ export default function EditBar({
                     );
                 })}
                 <div className="add-job-btn-container">
-                    <button className='add-job-btn'>+ Add job</button>
+                    <button className='add-job-btn' onClick={e => {
+                        e.preventDefault();
+                        const newExperience = [...experience];
+                        newExperience.push({
+                            position: '',
+                            company: '',
+                            location: '',
+                            start: {
+                                month: 'January',
+                                year: new Date().getFullYear().toString(),
+                            },
+                            end: {
+                                month: 'Present',
+                                year: '',
+                            },
+                            description: [''],
+                        });
+                        onExperienceChange(newExperience);
+                    }}>+ Add job</button>
                 </div>
             </form>
         ),
-    }
-
-    function handleStuff(this: HTMLInputElement) {
-        this.style.height = "";
-        this.style.height = this.scrollHeight + "px";
     }
     
     return (
@@ -190,32 +230,67 @@ export default function EditBar({
     );
 }
 
-const MonthDropdown = () => {
+const MonthDropdown = ({ experience, onExperienceChange, jobIdx, startOrEnd }: DateInputProp) => {
+    useEffect(() => {
+        const job = experience[jobIdx];
+        const month = startOrEnd === 'start' ? job.start.month : job.end.month;
+        if (month === 'Present') return;
+        const select = document.querySelector(`select.monthInput[data-jobIdx="${jobIdx}"][data-startOrEnd="${startOrEnd}"]`) as HTMLSelectElement;
+        select.value = month;
+        console.log(select.value);
+    }, [(startOrEnd === 'start' ? experience[jobIdx].start.month : experience[jobIdx].end.month)]);
+
     return (
-        <select>
-            <option value="Jan">January</option>
-            <option value="Feb">February</option>
-            <option value="Mar">March</option>
-            <option value="Apr">April</option>
+        <select className='monthInput' data-jobIdx={jobIdx} data-startOrEnd={startOrEnd} disabled={startOrEnd === 'end' && experience[jobIdx].end.month === 'Present'} onChange={e => {
+            const select = e.target as HTMLSelectElement;
+            const newExperience = [...experience];
+            const job = newExperience[jobIdx];
+            if (startOrEnd === 'start') job.start.month = select.value;
+            else job.end.month = select.value;
+            newExperience[jobIdx] = job;
+            onExperienceChange(newExperience);
+        }}>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
             <option value="May">May</option>
-            <option value="Jun">June</option>
-            <option value="Jul">July</option>
-            <option value="Aug">August</option>
-            <option value="Sep">September</option>
-            <option value="Oct">October</option>
-            <option value="Nov">November</option>
-            <option value="Dec">December</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+            <option value="Present" style={{display: 'none'}}>Present</option>
         </select>
-    )
+    );
 }
 
-const YearDropdown = () => {
+const YearDropdown = ({ experience, onExperienceChange, jobIdx, startOrEnd }: DateInputProp) => {
     const currentYear = new Date().getFullYear();
+    
+    useEffect(() => {
+        const job = experience[jobIdx];
+        const year = startOrEnd === 'start' ? job.start.year : job.end.year;
+        if (year === '') return;
+        const select = document.querySelector(`select.yearInput[data-jobIdx="${jobIdx}"][data-startOrEnd="${startOrEnd}"]`) as HTMLSelectElement;
+        select.value = year;
+    }, [(startOrEnd === 'start' ? experience[jobIdx].start.year : experience[jobIdx].end.year)]);
+
     return (
-        <select>
-            {Array.from({length: 100}, (_, i) => currentYear - i).map(year => 
-                <option value={year}>{year}</option>
+        <select className='yearInput' data-jobIdx={jobIdx} data-startOrEnd={startOrEnd} disabled={startOrEnd === 'end' && experience[jobIdx].end.month === 'Present'} onChange={e => {
+            const select = e.target as HTMLSelectElement;
+            const newExperience = [...experience];
+            const job = newExperience[jobIdx];
+            if (startOrEnd === 'start') job.start.year = select.value;
+            else job.end.year = select.value;
+            newExperience[jobIdx] = job;
+            onExperienceChange(newExperience);
+        }}> 
+            {Array.from({length: 100}, (_, i) => currentYear - i).map(y => 
+                <option key={y} value={y}>{y}</option>
             )}
         </select>
-    )
+    );
 }
