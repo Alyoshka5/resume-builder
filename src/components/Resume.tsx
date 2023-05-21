@@ -7,7 +7,7 @@ import React from 'react';
 
 export default function Resume({ info, xShift, setEditBarToggle, setCurrentEdit, themeColor, onExperienceChange, scrollToAddJobButton }: ResumeProps) {
     return (
-        <div style={{right: `${xShift === 0 ? 0 : xShift - 10}rem`, '--theme-color': themeColor} as React.CSSProperties} className='resume'>
+        <div style={{right: `${xShift === 0 ? 0 : xShift - 10}rem`, '--theme-color': themeColor} as React.CSSProperties} id='resume' className='resume'>
             <div className='main-content'>
                 <Name name={info.name} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} />
                 <Summary summary={info.summary} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} />

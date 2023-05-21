@@ -2,7 +2,9 @@ import { useEffect } from 'react';
 import '../styles/EditBar.css';
 import { EditBarProps, DateInputProp } from '../types';
 import Icon from '@mdi/react';
-import { mdiClose, mdiAccountOutline, mdiMessageOutline, mdiBriefcaseOutline, mdiEmailOutline, mdiSchoolOutline, mdiDeleteOutline } from '@mdi/js';
+import { mdiClose, mdiAccountOutline, mdiMessageOutline, mdiBriefcaseOutline, mdiEmailOutline, mdiSchoolOutline, mdiDeleteOutline, mdiFileDownloadOutline } from '@mdi/js';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 const hexToRgb = (hex: string) => {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -14,7 +16,9 @@ const rgbToHex = (rgb: string) => {
     return result ? `#${parseInt(result[1]).toString(16)}${parseInt(result[2]).toString(16)}${parseInt(result[3]).toString(16)}` : '';
 }
 
-
+const capitalizeWord = (word: string) => {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+}
 
 export default function EditBar({
         name, onNameChange,
@@ -270,6 +274,20 @@ export default function EditBar({
                 }}>
                     <Icon path={mdiSchoolOutline} size={1.2} />
                     <span>Education</span>
+                </div>
+                
+                <div className="tag" onClick={() => {
+                    const resume = document.querySelector('#resume') as HTMLDivElement;
+                    html2canvas(resume, {logging: true, useCORS: true}).then(canvas => {
+                        const imgData = canvas.toDataURL('image/png');
+                        const pdf = new jsPDF('p', 'mm', 'a4');
+                        const width = pdf.internal.pageSize.getWidth();
+                        const height = pdf.internal.pageSize.getHeight();
+                        pdf.addImage(imgData, 'PNG', 0, 0, width, height);
+                        pdf.save(`${capitalizeWord(name.first_name)}-${capitalizeWord(name.last_name)}-Resume.pdf`);
+                })}}>
+                    <Icon path={mdiFileDownloadOutline} size={1.2} />
+                    <span>Download</span>
                 </div>
             </div>
             <div className='edit-section'>
