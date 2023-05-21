@@ -29,6 +29,7 @@ export default function EditBar({
         education, onEducationChange, 
         xShift, setEditBarToggle,
         currentEdit, setCurrentEdit,
+        currentEditTab, setCurrentEditTab,
         addJobButtonRef
     }: EditBarProps) {
     const editForms = {
@@ -244,46 +245,45 @@ export default function EditBar({
             </form>
         )
     }
+
+    const toggleEditBarAndCurrentEdit = (edit: string) => {
+        if (edit === currentEdit) {
+            setEditBarToggle(false);
+            setCurrentEditTab('');
+            setTimeout(() => {
+                setCurrentEdit('');
+            }, 1000);
+        } else {
+            setEditBarToggle(true);
+            setCurrentEditTab(edit);
+            setCurrentEdit(edit);
+        }
+    }
     
     return (
         <div style={{right: `${xShift - 31}rem`}} className="edit-bar">
             <div className="tags">
-                <div className={`tag ${currentEdit === 'name_theme' ? 'active' : ''}`} onClick={() => { 
-                    setEditBarToggle(true);
-                    setCurrentEdit('name_theme');
-                }}>
+                <div className={`tag ${currentEditTab === 'name_theme' ? 'active' : ''}`} onClick={() => toggleEditBarAndCurrentEdit('name_theme')}>
                     <Icon path={mdiAccountOutline} size={1.2} />
                     <span>Name & Theme</span>
                 </div>
 
-                <div className={`tag ${currentEdit === 'summary' ? 'active' : ''}`} onClick={() => { 
-                    setEditBarToggle(true);
-                    setCurrentEdit('summary');
-                }}>
+                <div className={`tag ${currentEditTab === 'summary' ? 'active' : ''}`} onClick={() => toggleEditBarAndCurrentEdit('summary')}>
                     <Icon path={mdiMessageOutline} size={1.2} />
                     <span>Summary</span>
                 </div>
 
-                <div className={`tag ${currentEdit === 'experience' ? 'active' : ''}`} onClick={() => { 
-                    setEditBarToggle(true);
-                    setCurrentEdit('experience');
-                }}>
+                <div className={`tag ${currentEditTab === 'experience' ? 'active' : ''}`} onClick={() => toggleEditBarAndCurrentEdit('experience')}>
                     <Icon path={mdiBriefcaseOutline} size={1.2} />
                     <span>Experience</span>
                 </div>
 
-                <div className={`tag ${currentEdit === 'contact' ? 'active' : ''}`} onClick={() => { 
-                    setEditBarToggle(true);
-                    setCurrentEdit('contact');
-                }}>
+                <div className={`tag ${currentEditTab === 'contact' ? 'active' : ''}`} onClick={() => toggleEditBarAndCurrentEdit('contact')}>
                     <Icon path={mdiEmailOutline} size={1.2} />
                     <span>Contact</span>
                 </div>
 
-                <div className={`tag ${currentEdit === 'education' ? 'active' : ''}`} onClick={() => { 
-                    setEditBarToggle(true);
-                    setCurrentEdit('education');
-                }}>
+                <div className={`tag ${currentEditTab === 'education' ? 'active' : ''}`} onClick={() => toggleEditBarAndCurrentEdit('education')}>
                     <Icon path={mdiSchoolOutline} size={1.2} />
                     <span>Education</span>
                 </div>
@@ -303,7 +303,11 @@ export default function EditBar({
                 </div>
             </div>
             <div className='edit-section'>
-                <div className='close-btn' onClick={() => { setEditBarToggle(false) }}>
+                <div className='close-btn' onClick={() => { 
+                    setEditBarToggle(false);
+                    setCurrentEditTab('');
+                    setTimeout(() => {setCurrentEdit('')} , 1000);
+                }}>
                     <Icon path={mdiClose} size={1.2} />
                 </div>
 

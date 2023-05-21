@@ -14,6 +14,7 @@ function App() {
   const [xShift, setXShift] = useState(0);
   const [editBarToggle, setEditBarToggle] = useState(false);
   const [currentEdit, setCurrentEdit] = useState('');
+  const [currentEditTab, setCurrentEditTab] = useState('');
   const addJobButtonRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -47,6 +48,7 @@ function App() {
         education={education} onEducationChange={setEducation} 
         xShift={xShift} setEditBarToggle={setEditBarToggle}
         currentEdit={currentEdit} setCurrentEdit={setCurrentEdit}
+        currentEditTab={currentEditTab} setCurrentEditTab={setCurrentEditTab}
         addJobButtonRef={addJobButtonRef}
       />
     </div>

@@ -108,6 +108,8 @@ interface EditBarProps {
     setEditBarToggle(editBarToggle: boolean): void;
     currentEdit: string;
     setCurrentEdit(currentEdit: string): void;
+    currentEditTab: string;
+    setCurrentEditTab(currentEditTab: string): void;
     addJobButtonRef: React.RefObject<HTMLDivElement>;
 }
 
