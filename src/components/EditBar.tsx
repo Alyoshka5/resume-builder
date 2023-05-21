@@ -34,199 +34,211 @@ export default function EditBar({
     const editForms = {
         name_theme: (
             <form className="edit-form name-form">
-                <div className='input-container'>
-                    <label htmlFor="first-name">First name</label>
-                    <input type="text" value={name.first_name} name="first-name" onChange={(e) => onNameChange({...name, first_name: e.target.value})} />
-                </div>
-                <div className='input-container'>
-                    <label htmlFor="first-name">Last name</label>
-                    <input type="text" value={name.last_name} name="last-name" onChange={(e) => onNameChange({...name, last_name: e.target.value})} />
-                </div>
-                <div className='input-container color-input-container'>
-                    <label htmlFor="theme-color">Theme Color</label>
-                    <input type="color" value={rgbToHex(`rgb(${themeColor})`)} name="theme-color" onChange={(e) => setThemeColor(hexToRgb(e.target.value))} />
+                <h2 className='edit-section-header'>Name & Theme</h2>
+                <div className="edit-form-content">
+                    <div className='input-container'>
+                        <label htmlFor="first-name">First name</label>
+                        <input type="text" value={name.first_name} name="first-name" onChange={(e) => onNameChange({...name, first_name: e.target.value})} />
+                    </div>
+                    <div className='input-container'>
+                        <label htmlFor="first-name">Last name</label>
+                        <input type="text" value={name.last_name} name="last-name" onChange={(e) => onNameChange({...name, last_name: e.target.value})} />
+                    </div>
+                    <div className='input-container color-input-container'>
+                        <label htmlFor="theme-color">Theme Color</label>
+                        <input type="color" value={rgbToHex(`rgb(${themeColor})`)} name="theme-color" onChange={(e) => setThemeColor(hexToRgb(e.target.value))} />
+                    </div>
                 </div>
             </form>
         ), 
         summary: (
             <form className="edit-form summary-form">
+                <h2 className='edit-section-header'>Summary</h2>
                 <div className='input-container'>
-                    <label htmlFor="summary">Summary</label>
                     <textarea value={summary} name="summary" cols={30} rows={10} onChange={(e) => onSummaryChange(e.target.value)} />
                 </div>
             </form>
         ),
         experience: (
             <form className="edit-form experience-form">
-                {experience.map((job, jobIdx) => {
-                    return (
-                        <div className="job-container" key={jobIdx}>
-                            <div className="job-header-container">
-                                <h2 className='job-header'>Job {jobIdx + 1}</h2>
-                                <div className="remove-job-btn" onClick={() => {
-                                    const newExperience = [...experience];
-                                    newExperience.splice(jobIdx, 1);
-                                    onExperienceChange(newExperience);
-                                }}>
-                                    <Icon path={mdiDeleteOutline} size={1.05}></Icon>
-                                </div>
-                            </div>
-                            <div key={jobIdx} className="job">
-                                <div className='input-container'>
-                                    <label htmlFor="job-title">Job Title</label>
-                                    <input type="text" value={job.position} name="job-title" onChange={(e) => {
+                <h2 className='edit-section-header'>Experience</h2>
+                <div className='edit-form-content'>
+                    {experience.map((job, jobIdx) => {
+                        return (
+                            <div className="job-container" key={jobIdx}>
+                                <div className="job-header-container">
+                                    <h3 className='job-header'>{job.position}</h3>
+                                    <div className="remove-job-btn" onClick={() => {
                                         const newExperience = [...experience];
-                                        newExperience[jobIdx].position = e.target.value;
+                                        newExperience.splice(jobIdx, 1);
                                         onExperienceChange(newExperience);
-                                    }} />
-                                </div>
-                                <div className='input-container'>
-                                    <label htmlFor="company-name">Employer</label>
-                                    <input type="text" value={job.company} name="company-name" onChange={(e) => {
-                                        const newExperience = [...experience];
-                                        newExperience[jobIdx].company = e.target.value;
-                                        onExperienceChange(newExperience);
-                                    }} />
-                                </div>
-                                <div className='input-container'>
-                                    <label htmlFor="job-location">Location</label>
-                                    <input type="text" value={job.location} name="job-location" onChange={(e) => {
-                                        const newExperience = [...experience];
-                                        newExperience[jobIdx].location = e.target.value;
-                                        onExperienceChange(newExperience);
-                                    }} />
-                                </div>
-                                <div className='input-container'>
-                                    <label htmlFor="job-start">Start Date</label>
-                                    <div className='date-input-container'>
-                                        <MonthDropdown experience={experience} onExperienceChange={onExperienceChange} jobIdx={jobIdx} startOrEnd="start" />
-                                        <YearDropdown experience={experience} onExperienceChange={onExperienceChange} jobIdx={jobIdx} startOrEnd="start" />
+                                    }}>
+                                        <Icon path={mdiDeleteOutline} size={1.05}></Icon>
                                     </div>
                                 </div>
-                                <div className='input-container'>
-                                    <label htmlFor="job-end">End Date</label>
-                                    <div className="date-input-container">
-                                        <MonthDropdown experience={experience} onExperienceChange={onExperienceChange} jobIdx={jobIdx} startOrEnd="end" />
-                                        <YearDropdown experience={experience} onExperienceChange={onExperienceChange} jobIdx={jobIdx} startOrEnd="end" />
-                                    </div>
-                                    <div className='current-job-container'>
-                                        <input type="checkbox" name="job-end" checked={experience[jobIdx].end.month === 'Present'} onChange={e => {
+                                <div key={jobIdx} className="job">
+                                    <div className='input-container'>
+                                        <label htmlFor="job-title">Job Title</label>
+                                        <input type="text" value={job.position} name="job-title" onChange={(e) => {
                                             const newExperience = [...experience];
-                                            newExperience[jobIdx].end.month = e.target.checked ? 'Present' : 'January';
-                                            newExperience[jobIdx].end.year = e.target.checked ? '' : new Date().getFullYear().toString();
+                                            newExperience[jobIdx].position = e.target.value;
                                             onExperienceChange(newExperience);
                                         }} />
-                                        <label htmlFor="job-end">I currently work here</label>
                                     </div>
-                                </div>
-                                <div className='input-container'>
-                                    <label htmlFor="desc">Description</label>
-                                        {job.description.map((desc, descIdx) => {
-                                            return (
-                                                <div key={descIdx} className="job-desc-container">
-                                                    <textarea className='job-description' value={desc} name="job-description" autoFocus={desc === ''} onChange={(e) => {
-                                                        const textarea = e.target as HTMLTextAreaElement;
-                                                        textarea.style.height = "auto";
-                                                        textarea.style.height = textarea.scrollHeight + "px";
-                                                        const newExperience = [...experience];
-                                                        newExperience[jobIdx].description[descIdx] = e.target.value;
-                                                        onExperienceChange(newExperience);
-                                                    }} />
-                                                    <div className="delete-btn" onClick={() => {
-                                                        const newExperience = [...experience];
-                                                        newExperience[jobIdx].description.splice(descIdx, 1);
-                                                        onExperienceChange(newExperience);
-                                                    }}>
-                                                        <Icon path={mdiDeleteOutline} size={1.05}></Icon>
-                                                    </div>
-                                                </div>
-                                            );
-                                        })}
-                                    <div className="add-point-btn-container">
-                                        <button className='add-point-btn' onClick={e => {
-                                            e.preventDefault();
+                                    <div className='input-container'>
+                                        <label htmlFor="company-name">Employer</label>
+                                        <input type="text" value={job.company} name="company-name" onChange={(e) => {
                                             const newExperience = [...experience];
-                                            newExperience[jobIdx].description.push('');
+                                            newExperience[jobIdx].company = e.target.value;
                                             onExperienceChange(newExperience);
-                                        }}>+ Add point</button>
+                                        }} />
+                                    </div>
+                                    <div className='input-container'>
+                                        <label htmlFor="job-location">Location</label>
+                                        <input type="text" value={job.location} name="job-location" onChange={(e) => {
+                                            const newExperience = [...experience];
+                                            newExperience[jobIdx].location = e.target.value;
+                                            onExperienceChange(newExperience);
+                                        }} />
+                                    </div>
+                                    <div className='input-container'>
+                                        <label htmlFor="job-start">Start Date</label>
+                                        <div className='date-input-container'>
+                                            <MonthDropdown experience={experience} onExperienceChange={onExperienceChange} jobIdx={jobIdx} startOrEnd="start" />
+                                            <YearDropdown experience={experience} onExperienceChange={onExperienceChange} jobIdx={jobIdx} startOrEnd="start" />
+                                        </div>
+                                    </div>
+                                    <div className='input-container'>
+                                        <label htmlFor="job-end">End Date</label>
+                                        <div className="date-input-container">
+                                            <MonthDropdown experience={experience} onExperienceChange={onExperienceChange} jobIdx={jobIdx} startOrEnd="end" />
+                                            <YearDropdown experience={experience} onExperienceChange={onExperienceChange} jobIdx={jobIdx} startOrEnd="end" />
+                                        </div>
+                                        <div className='current-job-container'>
+                                            <input type="checkbox" name="job-end" checked={experience[jobIdx].end.month === 'Present'} onChange={e => {
+                                                const newExperience = [...experience];
+                                                newExperience[jobIdx].end.month = e.target.checked ? 'Present' : 'January';
+                                                newExperience[jobIdx].end.year = e.target.checked ? '' : new Date().getFullYear().toString();
+                                                onExperienceChange(newExperience);
+                                            }} />
+                                            <label htmlFor="job-end">I currently work here</label>
+                                        </div>
+                                    </div>
+                                    <div className='input-container'>
+                                        <label htmlFor="desc">Description</label>
+                                            {job.description.map((desc, descIdx) => {
+                                                return (
+                                                    <div key={descIdx} className="job-desc-container">
+                                                        <textarea className='job-description' value={desc} name="job-description" autoFocus={desc === ''} onChange={(e) => {
+                                                            const textarea = e.target as HTMLTextAreaElement;
+                                                            textarea.style.height = "auto";
+                                                            textarea.style.height = textarea.scrollHeight + "px";
+                                                            const newExperience = [...experience];
+                                                            newExperience[jobIdx].description[descIdx] = e.target.value;
+                                                            onExperienceChange(newExperience);
+                                                        }} />
+                                                        <div className="delete-btn" onClick={() => {
+                                                            const newExperience = [...experience];
+                                                            newExperience[jobIdx].description.splice(descIdx, 1);
+                                                            onExperienceChange(newExperience);
+                                                        }}>
+                                                            <Icon path={mdiDeleteOutline} size={1.05}></Icon>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                        <div className="add-point-btn-container">
+                                            <button className='add-point-btn' onClick={e => {
+                                                e.preventDefault();
+                                                const newExperience = [...experience];
+                                                newExperience[jobIdx].description.push('');
+                                                onExperienceChange(newExperience);
+                                            }}>+ Add point</button>
+                                        </div>
                                     </div>
                                 </div>
+                                <hr></hr>
                             </div>
-                            <hr></hr>
-                        </div>
-                    );
-                })}
-                <div className="add-job-btn-container" ref={addJobButtonRef}>
-                    <button className='add-job-btn' onClick={e => {
-                        e.preventDefault();
-                        const newExperience = [...experience];
-                        newExperience.push({
-                            position: '',
-                            company: '',
-                            location: '',
-                            start: {
-                                month: 'January',
-                                year: new Date().getFullYear().toString(),
-                            },
-                            end: {
-                                month: 'Present',
-                                year: '',
-                            },
-                            description: [''],
-                        });
-                        onExperienceChange(newExperience);
-                    }}>+ Add job</button>
+                        );
+                    })}
+                    <div className="add-job-btn-container" ref={addJobButtonRef}>
+                        <button className='add-job-btn' onClick={e => {
+                            e.preventDefault();
+                            const newExperience = [...experience];
+                            newExperience.push({
+                                position: '',
+                                company: '',
+                                location: '',
+                                start: {
+                                    month: 'January',
+                                    year: new Date().getFullYear().toString(),
+                                },
+                                end: {
+                                    month: 'Present',
+                                    year: '',
+                                },
+                                description: [''],
+                            });
+                            onExperienceChange(newExperience);
+                        }}>+ Add job</button>
+                    </div>
                 </div>
             </form>
         ),
         contact: (
             <form className="edit-form contact-form">
-                <div className='input-container'>
-                    <label htmlFor="phone">Phone</label>
-                    <input type="phone" value={contact.phone} name="phone" onChange={(e) => {
-                        onContactChange({...contact, phone: e.target.value});
-                    }} />
-                </div>
-                <div className='input-container'>
-                    <label htmlFor="email">Email</label>
-                    <input type="email" value={contact.email} name="email" onChange={(e) => {
-                        onContactChange({...contact, email: e.target.value});
-                    }} />
-                </div>
-                <div className='input-container'>
-                    <label htmlFor="address">Address</label>
-                    <input type="address" value={contact.address} name="address" onChange={(e) => {
-                        onContactChange({...contact, address: e.target.value});
-                    }} />
+                <h2 className='edit-section-header'>Contact</h2>
+                <div className="edit-form-content">
+                    <div className='input-container'>
+                        <label htmlFor="phone">Phone</label>
+                        <input type="phone" value={contact.phone} name="phone" onChange={(e) => {
+                            onContactChange({...contact, phone: e.target.value});
+                        }} />
+                    </div>
+                    <div className='input-container'>
+                        <label htmlFor="email">Email</label>
+                        <input type="email" value={contact.email} name="email" onChange={(e) => {
+                            onContactChange({...contact, email: e.target.value});
+                        }} />
+                    </div>
+                    <div className='input-container'>
+                        <label htmlFor="address">Address</label>
+                        <input type="address" value={contact.address} name="address" onChange={(e) => {
+                            onContactChange({...contact, address: e.target.value});
+                        }} />
+                    </div>
                 </div>
             </form>
         ),
         education: (
             <form className="edit-form education-form">
-                <div className="input-container">
-                    <label htmlFor="school">School</label>
-                    <input type="text" value={education.school} name="school" onChange={(e) => {
-                        onEducationChange({...education, school: e.target.value});
-                    }} />
-                </div>
-                <div className="input-container">
-                    <label htmlFor="degree">Degree</label>
-                    <input type="text" value={education.degree} name="degree" onChange={(e) => {
-                        onEducationChange({...education, degree: e.target.value});
-                    }} />
-                </div>
-                <div className="input-container">
-                    <label htmlFor="location">Location</label>
-                    <input type="text" value={education.location} name="location" onChange={(e) => {
-                        onEducationChange({...education, location: e.target.value});
-                    }} />
-                </div>
-                <div className="input-container">
-                    <label htmlFor="graduation">Graduation</label>
+                <h2 className='edit-section-header'>Education</h2>
+                    <div className="edit-form-content">
                     <div className="input-container">
-                        <input type="month" value={education.graduation} name='graudation' onChange={(e) => {
-                        onEducationChange({...education, graduation: e.target.value});
-                    }} />
+                        <label htmlFor="school">School</label>
+                        <input type="text" value={education.school} name="school" onChange={(e) => {
+                            onEducationChange({...education, school: e.target.value});
+                        }} />
+                    </div>
+                    <div className="input-container">
+                        <label htmlFor="degree">Degree</label>
+                        <input type="text" value={education.degree} name="degree" onChange={(e) => {
+                            onEducationChange({...education, degree: e.target.value});
+                        }} />
+                    </div>
+                    <div className="input-container">
+                        <label htmlFor="location">Location</label>
+                        <input type="text" value={education.location} name="location" onChange={(e) => {
+                            onEducationChange({...education, location: e.target.value});
+                        }} />
+                    </div>
+                    <div className="input-container">
+                        <label htmlFor="graduation">Graduation</label>
+                        <div className="input-container">
+                            <input type="month" value={education.graduation} name='graudation' onChange={(e) => {
+                            onEducationChange({...education, graduation: e.target.value});
+                        }} />
+                        </div>
                     </div>
                 </div>
             </form>

@@ -59,6 +59,11 @@
 .edit-form {
     display: flex;
     flex-direction: column;
+}
+
+.edit-form-content {
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
 }
 
@@ -131,7 +136,16 @@
     resize: none;
 }
 
+.edit-section-header {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
 /* Experience */
+.experience-form .edit-section-header {
+    margin-bottom: 0.5rem;
+}
+
 .experience-form .job {
     box-sizing: border-box;
     display: flex;
@@ -146,7 +160,8 @@
 }
 
 .experience-form .job-header {
-    margin: 0;
+    font-size: 1.3rem;
+    margin: 0 0 0.2rem 0;
     position: relative;
 }
 
