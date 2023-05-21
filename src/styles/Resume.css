@@ -96,7 +96,7 @@ p, li {
     display: none;
 }
 .add-experience-btn:hover {
-    background-color: #4257782c;
+    background-color: rgba(var(--theme-color), 0.2);
 }
 
 .experience .section-header-container:hover .add-experience-btn {
