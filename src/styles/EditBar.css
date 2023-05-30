@@ -4,9 +4,9 @@
 
 .edit-bar {
     height: 100%;
-    width: calc(30rem + var(--edit-bar-tag-width));
+    width: calc(32rem + var(--edit-bar-tag-width));
     position: fixed;
-    right: -500px;
+    left: -500px;
     top: 0;
     transition: 1s ease;
     display: flex;
@@ -52,6 +52,9 @@
     cursor: pointer;
     font-size: 1.2rem;
     background-color: #00000000;
+    position: relative;
+    align-self: end;
+    float: right;
     width: fit-content;
     border: none;
 }

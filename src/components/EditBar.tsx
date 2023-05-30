@@ -260,8 +260,21 @@ export default function EditBar({
         }
     }
     
+
     return (
-        <div style={{right: `${xShift - 31}rem`}} className="edit-bar">
+        <div style={{left: `${xShift - 32}rem`}} className="edit-bar">
+            <div className='edit-section'>
+                <div className='close-btn' onClick={() => { 
+                    setEditBarToggle(false);
+                    setCurrentEditTab('');
+                    setTimeout(() => {setCurrentEdit('')} , 1000);
+                }}>
+                    <Icon path={mdiClose} size={1.2} />
+                </div>
+
+                {editForms[currentEdit as keyof typeof editForms]}
+
+            </div>
             <div className="tags">
                 <div className={`tag ${currentEditTab === 'name_theme' ? 'active' : ''}`} onClick={() => toggleEditBarAndCurrentEdit('name_theme')}>
                     <Icon path={mdiAccountOutline} size={1.2} />
@@ -302,21 +315,10 @@ export default function EditBar({
                     <span>Download</span>
                 </div>
             </div>
-            <div className='edit-section'>
-                <div className='close-btn' onClick={() => { 
-                    setEditBarToggle(false);
-                    setCurrentEditTab('');
-                    setTimeout(() => {setCurrentEdit('')} , 1000);
-                }}>
-                    <Icon path={mdiClose} size={1.2} />
-                </div>
-
-                {editForms[currentEdit as keyof typeof editForms]}
-
-            </div>
         </div>
     );
 }
+
 
 const MonthDropdown = ({ experience, onExperienceChange, jobIdx, startOrEnd }: DateInputProp) => {
     useEffect(() => {

@@ -8,6 +8,7 @@ interface NameProps {
     name: NameProp;
     setEditBarToggle(editBarOpen: boolean): void;
     setCurrentEdit(currentEdit: string): void;
+    setCurrentEditTab(currentEditTab: string): void;
 }
 
 interface SummaryProp {
@@ -17,6 +18,7 @@ interface SummaryProps {
     summary: string;
     setEditBarToggle(editBarOpen: boolean): void;
     setCurrentEdit(currentEdit: string): void;
+    setCurrentEditTab(currentEditTab: string): void;
 }
 
 interface DateProp {
@@ -44,6 +46,7 @@ interface ExperienceProps {
     experience: ExperienceProp[];
     setEditBarToggle(editBarOpen: boolean): void;
     setCurrentEdit(currentEdit: string): void;
+    setCurrentEditTab(currentEditTab: string): void;
     onExperienceChange(experience: ExperienceProp[]): void;
     scrollToAddJobButton(): void;
 }
@@ -57,6 +60,7 @@ interface ContactProps {
     contact: ContactProp;
     setEditBarToggle(editBarOpen: boolean): void;
     setCurrentEdit(currentEdit: string): void;
+    setCurrentEditTab(currentEditTab: string): void;
 }
 
 interface EducationProp {
@@ -70,6 +74,7 @@ interface EducationProps {
     education: EducationProp;
     setEditBarToggle(editBarOpen: boolean): void;
     setCurrentEdit(currentEdit: string): void;
+    setCurrentEditTab(currentEditTab: string): void;
 }
 
 
@@ -85,6 +90,7 @@ interface ResumeProps {
     editBarToggle: boolean;
     setEditBarToggle(editBarToggle: boolean): void;
     setCurrentEdit(currentEdit: string): void;
+    setCurrentEditTab(currentEditTab: string): void;
     themeColor: string;
     onExperienceChange(experience: ExperienceProp[]): void;
     scrollToAddJobButton(): void;

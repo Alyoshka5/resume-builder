@@ -1,6 +1,6 @@
 import './App.css';
 import Resume from './components/Resume';
-import EditBar from './components/EditBar'
+import EditBar from './components/EditBar';
 import React, { useState, useEffect, useRef } from 'react';
 import personInfo from './person_info';
 
@@ -18,7 +18,7 @@ function App() {
   const addJobButtonRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setXShift(editBarToggle ? 30 : 0);
+    setXShift(editBarToggle ? 32 : 0);
   }, [editBarToggle]);
 
   const scrollToAddJobButton = () => {
@@ -30,15 +30,6 @@ function App() {
 
   return (
     <div className='App' style={{overflow: 'hidden'}}>
-      <Resume 
-        editBarToggle={editBarToggle} 
-        setEditBarToggle={setEditBarToggle} 
-        setCurrentEdit={setCurrentEdit} 
-        info={{name, contact, summary, education, experience}} 
-        xShift={xShift} themeColor={themeColor} 
-        onExperienceChange={setExperience} 
-        scrollToAddJobButton={scrollToAddJobButton}
-      />
       <EditBar 
         name={name} onNameChange={setName}
         themeColor={themeColor} setThemeColor={setThemeColor}
@@ -50,6 +41,16 @@ function App() {
         currentEdit={currentEdit} setCurrentEdit={setCurrentEdit}
         currentEditTab={currentEditTab} setCurrentEditTab={setCurrentEditTab}
         addJobButtonRef={addJobButtonRef}
+      />
+      <Resume 
+        editBarToggle={editBarToggle} 
+        setEditBarToggle={setEditBarToggle} 
+        setCurrentEdit={setCurrentEdit} 
+        setCurrentEditTab={setCurrentEditTab} 
+        info={{name, contact, summary, education, experience}} 
+        xShift={xShift} themeColor={themeColor} 
+        onExperienceChange={setExperience} 
+        scrollToAddJobButton={scrollToAddJobButton}
       />
     </div>
   );

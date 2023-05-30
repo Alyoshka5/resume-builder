@@ -5,29 +5,30 @@ import { NameProps, SummaryProps, ExperienceProps, ContactProps, EducationProps,
 import React from 'react';
 
 
-export default function Resume({ info, xShift, setEditBarToggle, setCurrentEdit, themeColor, onExperienceChange, scrollToAddJobButton }: ResumeProps) {
+export default function Resume({ info, xShift, setEditBarToggle, setCurrentEdit, setCurrentEditTab, themeColor, onExperienceChange, scrollToAddJobButton }: ResumeProps) {
     return (
-        <div style={{right: `${xShift === 0 ? 0 : xShift - 10}rem`, '--theme-color': themeColor} as React.CSSProperties} id='resume' className='resume'>
+        <div style={{left: `${xShift === 0 ? 8 : xShift - 8}rem`, '--theme-color': themeColor} as React.CSSProperties} id='resume' className='resume'>
             <div className='main-content'>
-                <Name name={info.name} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} />
-                <Summary summary={info.summary} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} />
-                <Experience experience={info.experience} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} onExperienceChange={onExperienceChange} scrollToAddJobButton={scrollToAddJobButton} />
+                <Name name={info.name} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} setCurrentEditTab={setCurrentEditTab} />
+                <Summary summary={info.summary} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} setCurrentEditTab={setCurrentEditTab} />
+                <Experience experience={info.experience} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} setCurrentEditTab={setCurrentEditTab} onExperienceChange={onExperienceChange} scrollToAddJobButton={scrollToAddJobButton} />
             </div>
             <div className='secondary-content'>
-                <Contact contact={info.contact} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} />
-                <Education education={info.education} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} />
+                <Contact contact={info.contact} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} setCurrentEditTab={setCurrentEditTab} />
+                <Education education={info.education} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} setCurrentEditTab={setCurrentEditTab} />
             </div>
         </div>
     );
 }
 
 
-function Name({ name, setEditBarToggle, setCurrentEdit }: NameProps) {
+function Name({ name, setEditBarToggle, setCurrentEdit, setCurrentEditTab }: NameProps) {
     return (
         <div className='name component'>
             <h1 className='name-header' onClick={() => { 
                 setEditBarToggle(true);
-                setCurrentEdit('name_theme')
+                setCurrentEdit('name_theme');
+                setCurrentEditTab('name_theme');
             }} >
                 {name.first_name} {name.last_name}
             </h1>
@@ -36,11 +37,12 @@ function Name({ name, setEditBarToggle, setCurrentEdit }: NameProps) {
     );
 }
 
-function Summary({ summary, setEditBarToggle, setCurrentEdit }: SummaryProps) {
+function Summary({ summary, setEditBarToggle, setCurrentEdit, setCurrentEditTab }: SummaryProps) {
     return (
         <div className='summary component' onClick={() => { 
             setEditBarToggle(true);
             setCurrentEdit('summary');
+            setCurrentEditTab('summary');
         }}>
             <h2 className='section-header' >Summary</h2>
             <p className='content'>{summary}</p>
@@ -48,7 +50,7 @@ function Summary({ summary, setEditBarToggle, setCurrentEdit }: SummaryProps) {
     );
 }
 
-function Experience({ experience, setCurrentEdit, setEditBarToggle, onExperienceChange, scrollToAddJobButton }: ExperienceProps) {
+function Experience({ experience, setCurrentEdit, setCurrentEditTab, setEditBarToggle, onExperienceChange, scrollToAddJobButton }: ExperienceProps) {
     const monthShortener: { [key: string]: string } = {
         'January': 'Jan',
         'February': 'Feb',
@@ -89,6 +91,7 @@ function Experience({ experience, setCurrentEdit, setEditBarToggle, onExperience
                         onExperienceChange(newExperience);
                         scrollToAddJobButton();
                         setCurrentEdit('experience');
+                        setCurrentEditTab('experience');
                         setEditBarToggle(true);
                     }}>Add Experience</button>
             </div>
@@ -123,11 +126,12 @@ function Experience({ experience, setCurrentEdit, setEditBarToggle, onExperience
     );
 }
 
-function Contact({ contact, setEditBarToggle, setCurrentEdit }: ContactProps) {
+function Contact({ contact, setEditBarToggle, setCurrentEdit, setCurrentEditTab }: ContactProps) {
     return (
         <div className='contact component' onClick={() => { 
             setEditBarToggle(true);
             setCurrentEdit('contact');
+            setCurrentEditTab('contact');
         }}>
             <h2 className='section-header'>Contact</h2>
             <div className='contact-info'>
@@ -148,7 +152,7 @@ function Contact({ contact, setEditBarToggle, setCurrentEdit }: ContactProps) {
     );
 }
 
-function Education({ education, setEditBarToggle, setCurrentEdit }: EducationProps) {
+function Education({ education, setEditBarToggle, setCurrentEdit, setCurrentEditTab }: EducationProps) {
     const numMonthToMonth: { [key: string]: string } = {
         '01': 'Jan',
         '02': 'Feb',
@@ -173,6 +177,7 @@ function Education({ education, setEditBarToggle, setCurrentEdit }: EducationPro
         <div className='education component' onClick={() => { 
             setEditBarToggle(true);
             setCurrentEdit('education');
+            setCurrentEditTab('education');
         }}>
             <h2 className='section-header'>Education</h2>
             <div className='education-info'>
