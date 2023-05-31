@@ -263,10 +263,14 @@
     width: 100%;
     padding: 0.5rem;
     box-sizing: border-box;
-    border: 1px solid #000;
+    border: 1px solid #727272;
     border-radius: 0.5rem;
     box-sizing: border-box;
     resize: none;
+}
+.experience-form .job-description:focus {
+    outline: none;
+    border: 1px solid #000;
 }
 
 .experience-form .job-desc-container .delete-btn {
