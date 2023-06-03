@@ -106,7 +106,7 @@ function Experience({ experience, setCurrentEdit, setCurrentEditTab, setEditBarT
                                 <span className='job-position'>{job.position}</span> <span className='job-date'>{monthShortener[job.start.month]} {job.start.year} - {monthShortener[job.end.month]} {job.end.year}</span>
                             </div>
                             <div>
-                                <span className='job-company'>{job.company},</span> <span className='job-location'>{job.location}</span>
+                                <span className='job-company'>{job.company}{job.company && job.location ? ',' : ''}</span> <span className='job-location'>{job.location}</span>
                             </div>
                         </div>
                         <ul className='job-description'>
