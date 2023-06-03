@@ -178,7 +178,7 @@ export default function EditBar({
                                     month: 'Present',
                                     year: '',
                                 },
-                                description: [],
+                                description: [''],
                             });
                             onExperienceChange(newExperience);
                         }}>+ Add job</button>
