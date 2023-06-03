@@ -276,43 +276,56 @@ export default function EditBar({
 
             </div>
             <div className="tags">
-                <div className={`tag ${currentEditTab === 'name_theme' ? 'active' : ''}`} onClick={() => toggleEditBarAndCurrentEdit('name_theme')}>
-                    <Icon path={mdiAccountOutline} size={1.2} />
-                    <span>Name & Theme</span>
-                </div>
+                <div className="tag-section">
+                    <h4 className='tag-sub-header'>Profile & Experience</h4>
+                    <div className={`tag ${currentEditTab === 'name_theme' ? 'active' : ''}`} onClick={() => toggleEditBarAndCurrentEdit('name_theme')}>
+                        <Icon path={mdiAccountOutline} size={1.1} />
+                        <span>Name & Theme</span>
+                    </div>
 
-                <div className={`tag ${currentEditTab === 'summary' ? 'active' : ''}`} onClick={() => toggleEditBarAndCurrentEdit('summary')}>
-                    <Icon path={mdiMessageOutline} size={1.2} />
-                    <span>Summary</span>
-                </div>
+                    <div className={`tag ${currentEditTab === 'summary' ? 'active' : ''}`} onClick={() => toggleEditBarAndCurrentEdit('summary')}>
+                        <Icon path={mdiMessageOutline} size={1.1} />
+                        <span>Summary</span>
+                    </div>
 
-                <div className={`tag ${currentEditTab === 'experience' ? 'active' : ''}`} onClick={() => toggleEditBarAndCurrentEdit('experience')}>
-                    <Icon path={mdiBriefcaseOutline} size={1.2} />
-                    <span>Experience</span>
+                    <div className={`tag ${currentEditTab === 'experience' ? 'active' : ''}`} onClick={() => toggleEditBarAndCurrentEdit('experience')}>
+                        <Icon path={mdiBriefcaseOutline} size={1.1} />
+                        <span>Experience</span>
+                    </div>
                 </div>
+                <div className="tag-section">
+                    <h4 className='tag-sub-header'>Contact & Academic</h4>
+                    <div className={`tag ${currentEditTab === 'contact' ? 'active' : ''}`} onClick={() => toggleEditBarAndCurrentEdit('contact')}>
+                        <Icon path={mdiEmailOutline} size={1.1} />
+                        <span>Contact</span>
+                    </div>
 
-                <div className={`tag ${currentEditTab === 'contact' ? 'active' : ''}`} onClick={() => toggleEditBarAndCurrentEdit('contact')}>
-                    <Icon path={mdiEmailOutline} size={1.2} />
-                    <span>Contact</span>
-                </div>
-
-                <div className={`tag ${currentEditTab === 'education' ? 'active' : ''}`} onClick={() => toggleEditBarAndCurrentEdit('education')}>
-                    <Icon path={mdiSchoolOutline} size={1.2} />
-                    <span>Education</span>
+                    <div className={`tag ${currentEditTab === 'education' ? 'active' : ''}`} onClick={() => toggleEditBarAndCurrentEdit('education')}>
+                        <Icon path={mdiSchoolOutline} size={1.1} />
+                        <span>Education</span>
+                    </div>
                 </div>
                 
-                <div className="tag" onClick={() => {
-                    const resume = document.querySelector('#resume') as HTMLDivElement;
-                    html2canvas(resume, {logging: true, useCORS: true}).then(canvas => {
-                        const imgData = canvas.toDataURL('image/png');
-                        const pdf = new jsPDF('p', 'mm', 'a4');
-                        const width = pdf.internal.pageSize.getWidth();
-                        const height = pdf.internal.pageSize.getHeight();
-                        pdf.addImage(imgData, 'PNG', 0, 0, width, height);
-                        pdf.save(`${capitalizeWord(name.first_name)}-${capitalizeWord(name.last_name)}-Resume.pdf`);
-                })}}>
-                    <Icon path={mdiFileDownloadOutline} size={1.2} />
-                    <span>Download</span>
+                <div className="tag-divider"></div>
+                
+                <div className="tag-section">
+                    <div className="tag-sub-header">Download Resume</div>
+                    <input type='text' id='resume-name-input' placeholder='File Name'></input>
+                    <div className="tag" onClick={() => {
+                        const resumeNameInput = document.querySelector('#resume-name-input') as HTMLInputElement;
+                        if (resumeNameInput.value === '') return;
+                        const resume = document.querySelector('#resume') as HTMLDivElement;
+                        html2canvas(resume, {logging: true, useCORS: true}).then(canvas => {
+                            const imgData = canvas.toDataURL('image/png');
+                            const pdf = new jsPDF('p', 'mm', 'a4');
+                            const width = pdf.internal.pageSize.getWidth();
+                            const height = pdf.internal.pageSize.getHeight();
+                            pdf.addImage(imgData, 'PNG', 0, 0, width, height);
+                            pdf.save(`${resumeNameInput.value}.pdf`);
+                    })}}>
+                        <Icon path={mdiFileDownloadOutline} size={1.2} />
+                        <span>Download</span>
+                    </div>
                 </div>
             </div>
         </div>
