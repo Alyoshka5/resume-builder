@@ -338,13 +338,12 @@ const MonthDropdown = ({ experience, onExperienceChange, jobIdx, startOrEnd }: D
         const job = experience[jobIdx];
         const month = startOrEnd === 'start' ? job.start.month : job.end.month;
         if (month === 'Present') return;
-        const select = document.querySelector(`select.monthInput[data-jobIdx="${jobIdx}"][data-startOrEnd="${startOrEnd}"]`) as HTMLSelectElement;
+        const select = document.querySelector(`select.monthInput[data-job-idx="${jobIdx}"][data-start-or-end="${startOrEnd}"]`) as HTMLSelectElement;
         select.value = month;
-        console.log(select.value);
     }, [(startOrEnd === 'start' ? experience[jobIdx].start.month : experience[jobIdx].end.month)]);
 
     return (
-        <select className='monthInput' data-jobIdx={jobIdx} data-startOrEnd={startOrEnd} disabled={startOrEnd === 'end' && experience[jobIdx].end.month === 'Present'} onChange={e => {
+        <select className='monthInput' data-job-idx={jobIdx} data-start-or-end={startOrEnd} disabled={startOrEnd === 'end' && experience[jobIdx].end.month === 'Present'} onChange={e => {
             const select = e.target as HTMLSelectElement;
             const newExperience = [...experience];
             const job = newExperience[jobIdx];
@@ -377,12 +376,12 @@ const YearDropdown = ({ experience, onExperienceChange, jobIdx, startOrEnd }: Da
         const job = experience[jobIdx];
         const year = startOrEnd === 'start' ? job.start.year : job.end.year;
         if (year === '') return;
-        const select = document.querySelector(`select.yearInput[data-jobIdx="${jobIdx}"][data-startOrEnd="${startOrEnd}"]`) as HTMLSelectElement;
+        const select = document.querySelector(`select.yearInput[data-job-idx="${jobIdx}"][data-start-or-end="${startOrEnd}"]`) as HTMLSelectElement;
         select.value = year;
     }, [(startOrEnd === 'start' ? experience[jobIdx].start.year : experience[jobIdx].end.year)]);
 
     return (
-        <select className='yearInput' data-jobIdx={jobIdx} data-startOrEnd={startOrEnd} disabled={startOrEnd === 'end' && experience[jobIdx].end.month === 'Present'} onChange={e => {
+        <select className='yearInput' data-job-idx={jobIdx} data-start-or-end={startOrEnd} disabled={startOrEnd === 'end' && experience[jobIdx].end.month === 'Present'} onChange={e => {
             const select = e.target as HTMLSelectElement;
             const newExperience = [...experience];
             const job = newExperience[jobIdx];
