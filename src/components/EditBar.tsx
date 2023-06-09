@@ -310,7 +310,6 @@ export default function EditBar({
                     <input type='text' id='resume-name-input' placeholder='File Name'></input>
                     <div className="tag" onClick={() => {
                         const resumeNameInput = document.querySelector('#resume-name-input') as HTMLInputElement;
-                        if (resumeNameInput.value === '') return;
                         const resume = document.querySelector('#resume') as HTMLDivElement;
                         html2canvas(resume, {logging: true, useCORS: true}).then(canvas => {
                             const imgData = canvas.toDataURL('image/png');
@@ -318,7 +317,7 @@ export default function EditBar({
                             const width = pdf.internal.pageSize.getWidth();
                             const height = pdf.internal.pageSize.getHeight();
                             pdf.addImage(imgData, 'PNG', 0, 0, width, height);
-                            pdf.save(`${resumeNameInput.value}.pdf`);
+                            pdf.save(`${resumeNameInput.value === '' ? `${name.first_name}-${name.last_name}-Resume` : resumeNameInput.value}.pdf`);
                     })}}>
                         <Icon path={mdiFileDownloadOutline} size={1.2} />
                         <span>Download</span>
