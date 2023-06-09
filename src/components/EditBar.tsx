@@ -30,7 +30,6 @@ export default function EditBar({
         xShift, setEditBarToggle,
         currentEdit, setCurrentEdit,
         currentEditTab, setCurrentEditTab,
-        addJobButtonRef
     }: EditBarProps) {
     const editForms = {
         name_theme: (
@@ -162,7 +161,7 @@ export default function EditBar({
                             </div>
                         );
                     })}
-                    <div className="add-job-btn-container" ref={addJobButtonRef}>
+                    <div className="add-job-btn-container">
                         <button className='add-job-btn' onClick={e => {
                             e.preventDefault();
                             const newExperience = [...experience];

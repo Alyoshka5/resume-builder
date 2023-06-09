@@ -5,13 +5,13 @@ import { NameProps, SummaryProps, ExperienceProps, ContactProps, EducationProps,
 import React from 'react';
 
 
-export default function Resume({ info, xShift, setEditBarToggle, setCurrentEdit, setCurrentEditTab, themeColor, onExperienceChange, scrollToAddJobButton }: ResumeProps) {
+export default function Resume({ info, xShift, setEditBarToggle, setCurrentEdit, setCurrentEditTab, themeColor, onExperienceChange }: ResumeProps) {
     return (
         <div style={{left: `${xShift === 0 ? 8 : xShift - 8}rem`, '--theme-color': themeColor} as React.CSSProperties} id='resume' className='resume'>
             <div className='main-content'>
                 <Name name={info.name} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} setCurrentEditTab={setCurrentEditTab} />
                 <Summary summary={info.summary} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} setCurrentEditTab={setCurrentEditTab} />
-                <Experience experience={info.experience} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} setCurrentEditTab={setCurrentEditTab} onExperienceChange={onExperienceChange} scrollToAddJobButton={scrollToAddJobButton} />
+                <Experience experience={info.experience} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} setCurrentEditTab={setCurrentEditTab} onExperienceChange={onExperienceChange} />
             </div>
             <div className='secondary-content'>
                 <Contact contact={info.contact} setEditBarToggle={setEditBarToggle} setCurrentEdit={setCurrentEdit} setCurrentEditTab={setCurrentEditTab} />
@@ -50,7 +50,7 @@ function Summary({ summary, setEditBarToggle, setCurrentEdit, setCurrentEditTab 
     );
 }
 
-function Experience({ experience, setCurrentEdit, setCurrentEditTab, setEditBarToggle, onExperienceChange, scrollToAddJobButton }: ExperienceProps) {
+function Experience({ experience, setCurrentEdit, setCurrentEditTab, setEditBarToggle, onExperienceChange }: ExperienceProps) {
     const monthShortener: { [key: string]: string } = {
         'January': 'Jan',
         'February': 'Feb',
@@ -89,7 +89,6 @@ function Experience({ experience, setCurrentEdit, setCurrentEditTab, setEditBarT
                             description: [''],
                         });
                         onExperienceChange(newExperience);
-                        scrollToAddJobButton();
                         setCurrentEdit('experience');
                         setCurrentEditTab('experience');
                         setEditBarToggle(true);

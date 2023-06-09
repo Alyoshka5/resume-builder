@@ -48,7 +48,6 @@ interface ExperienceProps {
     setCurrentEdit(currentEdit: string): void;
     setCurrentEditTab(currentEditTab: string): void;
     onExperienceChange(experience: ExperienceProp[]): void;
-    scrollToAddJobButton(): void;
 }
 
 interface ContactProp {
@@ -93,7 +92,6 @@ interface ResumeProps {
     setCurrentEditTab(currentEditTab: string): void;
     themeColor: string;
     onExperienceChange(experience: ExperienceProp[]): void;
-    scrollToAddJobButton(): void;
 }
 
 // EditBar Types
@@ -116,7 +114,6 @@ interface EditBarProps {
     setCurrentEdit(currentEdit: string): void;
     currentEditTab: string;
     setCurrentEditTab(currentEditTab: string): void;
-    addJobButtonRef: React.RefObject<HTMLDivElement>;
 }
 
 // Export Types

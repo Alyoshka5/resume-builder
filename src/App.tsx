@@ -15,17 +15,10 @@ function App() {
   const [editBarToggle, setEditBarToggle] = useState(false);
   const [currentEdit, setCurrentEdit] = useState('');
   const [currentEditTab, setCurrentEditTab] = useState('');
-  const addJobButtonRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setXShift(editBarToggle ? 32 : 0);
   }, [editBarToggle]);
-
-  const scrollToAddJobButton = () => {
-    if (addJobButtonRef.current) {
-      addJobButtonRef.current.scrollIntoView();
-    }
-  }
 
 
   return (
@@ -40,7 +33,6 @@ function App() {
         xShift={xShift} setEditBarToggle={setEditBarToggle}
         currentEdit={currentEdit} setCurrentEdit={setCurrentEdit}
         currentEditTab={currentEditTab} setCurrentEditTab={setCurrentEditTab}
-        addJobButtonRef={addJobButtonRef}
       />
       <Resume 
         editBarToggle={editBarToggle} 
@@ -50,7 +42,6 @@ function App() {
         info={{name, contact, summary, education, experience}} 
         xShift={xShift} themeColor={themeColor} 
         onExperienceChange={setExperience} 
-        scrollToAddJobButton={scrollToAddJobButton}
       />
     </div>
   );
