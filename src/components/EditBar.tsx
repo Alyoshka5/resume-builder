@@ -66,16 +66,6 @@ export default function EditBar({
                     {experience.map((job, jobIdx) => {
                         return (
                             <div className="job-container" key={jobIdx}>
-                                <div className="job-header-container">
-                                    <h3 className='job-header'>{job.position}</h3>
-                                    <div className="remove-job-btn" onClick={() => {
-                                        const newExperience = [...experience];
-                                        newExperience.splice(jobIdx, 1);
-                                        onExperienceChange(newExperience);
-                                    }}>
-                                        <Icon path={mdiDeleteOutline} size={1.05}></Icon>
-                                    </div>
-                                </div>
                                 <div key={jobIdx} className="job">
                                     <div className='input-container'>
                                         <label htmlFor="job-title">Job Title</label>
@@ -156,6 +146,14 @@ export default function EditBar({
                                             }}>+ Add point</button>
                                         </div>
                                     </div>
+                                </div>
+                                <div className="remove-job-btn" onClick={() => {
+                                    const newExperience = [...experience];
+                                    newExperience.splice(jobIdx, 1);
+                                    onExperienceChange(newExperience);
+                                }}>
+                                    <Icon path={mdiDeleteOutline} size={0.9}></Icon>
+                                    <span>Remove Job</span>
                                 </div>
                                 <hr></hr>
                             </div>
