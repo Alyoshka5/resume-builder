@@ -317,7 +317,7 @@ export default function EditBar({
                             const width = pdf.internal.pageSize.getWidth();
                             const height = pdf.internal.pageSize.getHeight();
                             pdf.addImage(imgData, 'PNG', 0, 0, width, height);
-                            pdf.save(`${resumeNameInput.value === '' ? `${name.first_name}-${name.last_name}-Resume` : resumeNameInput.value}.pdf`);
+                            pdf.save(`${resumeNameInput.value === '' ? `${capitalizeWord(name.first_name)}-${capitalizeWord(name.last_name)}-Resume` : resumeNameInput.value}.pdf`);
                     })}}>
                         <Icon path={mdiFileDownloadOutline} size={1.2} />
                         <span>Download</span>
