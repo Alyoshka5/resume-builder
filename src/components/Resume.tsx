@@ -98,6 +98,7 @@ function Experience({ experience, setCurrentEdit, setCurrentEditTab, setEditBarT
                 return (
                     <div className='job-info' key={jobIdx} onClick={() => { 
                         setCurrentEdit('experience');
+                        setCurrentEditTab('experience');
                         setEditBarToggle(true);
                     }}>
                         <div className='job-details'>
