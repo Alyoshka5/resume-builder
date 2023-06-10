@@ -1,7 +1,7 @@
 import './App.css';
 import Resume from './components/Resume';
 import EditBar from './components/EditBar';
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import personInfo from './person_info';
 
 function App() {
